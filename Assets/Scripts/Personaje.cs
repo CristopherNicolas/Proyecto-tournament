@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Personaje : MonoBehaviour
+/// <summary>
+/// clase que contiene la base para crear las clases del personaje
+/// </summary>
+public abstract class Personaje : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float vida=100,energia=100;
+    public float h1c=3, h2c=7, h3c=16;
+    public float tiempoInvulnerabilidad = 5;
 
-    // Update is called once per frame
-    void Update()
+    public virtual void CambiarCooldowns(float _h1c, float _h2c, float _h3c)
     {
-        
+        h1c = _h1c; h2c = _h2c; h3c = _h3c;
+    }
+    public virtual void habilidad1()
+    {
+        energia -= 10;
+    }
+    public virtual void habilidad2()
+    {
+        energia -= 20;
+
+    }
+    public virtual void habilidad3()
+    {
+        energia -= 30;
+
     }
 }
