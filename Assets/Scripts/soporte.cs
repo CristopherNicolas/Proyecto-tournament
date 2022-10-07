@@ -16,4 +16,9 @@ public class soporte : Personaje
     {
         base.habilidad3();
     }
+    public override void Pasiva()
+    {
+        base.Pasiva();
+
+    }
 }

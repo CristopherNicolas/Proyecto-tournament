@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asesino : Personaje
+public class DPS: Personaje
 {
     public override void habilidad1()
     {
         base.habilidad1();
-        
     }
     public override void habilidad2()
     {
@@ -16,5 +15,9 @@ public class Asesino : Personaje
     public override void habilidad3()
     {
         base.habilidad3();
+    }
+    public override void Pasiva()
+    {
+        base.Pasiva();
     }
 }

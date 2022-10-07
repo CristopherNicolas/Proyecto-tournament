@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// clase que contiene la base para crear las clases del personaje
+/// bug posible  : cambiar la ui cuando cambien las stats 
 /// </summary>
 public abstract class Personaje : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public abstract class Personaje : MonoBehaviour
     public virtual void habilidad3()
     {
         energia -= 30;
+
+    }
+    public virtual void Pasiva()
+    {
 
     }
 }

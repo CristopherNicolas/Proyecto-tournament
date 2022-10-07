@@ -18,4 +18,8 @@ public class Tanque : Personaje
     {
         base.habilidad3();
     }
+    public override void Pasiva()
+    {
+        base.Pasiva();
+    }
 }

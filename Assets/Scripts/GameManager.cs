@@ -2,17 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager instance;
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else Destroy(gameObject);
+        //SpawnPlayers();!!!
     }
+    /// <summary>
+    /// ajustar lista al tener mapa
+    /// </summary>
+    public List<Transform> posiciones;
+    public List<GameObject> personajes;
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// este metodo debe ser llamado por el server, y debe ser llamado SOLO UNA VEZ, el cliente no debe usarlo
+    /// </summary>
+    public void SpawnPlayers()
     {
-        
+        for (int i = 0; i < posiciones.Count; i++)
+        {
+            Instantiate(personajes[0], posiciones[i]);
+        }
     }
 }
