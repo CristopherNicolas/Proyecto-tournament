@@ -6,20 +6,21 @@ using DG.Tweening;
 using System.Threading.Tasks;
 public class MenuPrincipal : MonoBehaviour
 {
+    Button CrearPartida, unirsePartida;
+    RectTransform panelOpciones, panelCrearParida;
+
     private IEnumerator Start()
     {
-        GameObject.Find("Enter").GetComponent<Button>
-           ().onClick.AddListener(() => {
-               GameObject.Find("Enter").GetComponent<RectTransform>
-                ().DOScale(Vector3.zero, 0.4f).WaitForCompletion();
-           });
-        var rtPanelOpciones = GameObject.Find("Panel").GetComponent<RectTransform>();
-        var rtOpciones = GameObject.Find("Opciones").GetComponent<RectTransform>();
-        GameObject.Find("Opciones").GetComponent<Button>()
-            .onClick.AddListener(() => {
-                rtPanelOpciones.DOScale(rtPanelOpciones.localScale.x > 0 ? Vector3.zero
-                    : Vector3.one, 0.5f);
-            });
-                yield break;
+        CacheComponents();
+        yield break;
+    }
+
+    void CacheComponents()
+    {
+        CrearPartida = GameObject.Find("BotonCrearPartida").GetComponent<Button>();
+        unirsePartida = GameObject.Find("Boton opciones").GetComponent<Button>();
+        panelOpciones=GameObject.Find("Panel opciones").GetComponent<RectTransform>();
+        panelCrearParida = GameObject.Find("panel opciones").GetComponent<RectTransform>();
+
     }
 }
