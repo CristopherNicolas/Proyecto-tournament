@@ -18,18 +18,17 @@ public class Lobby : NetworkBehaviour
     public IEnumerator Start()
     {
         //fase de seleccion
-
+        StartLobby();
         yield return new WaitUntil(() => !estaSeleccionando);
         SeleccionDePersonajePanel.DOScale(Vector3.zero, .5f);         
         yield break;
     }
     public async void StartLobby()
     {
-        // primero llevar a cabo fase de seleccion.
-        //comprobar al conectarse cuantos jugadores hay
         estaEsperandoPorLosDemas.Value = true;
         while (estaEsperandoPorLosDemas.Value)
         {
+            Debug.Log(NetworkManager.Singleton.ConnectedClientsList.Count);
             await Task.Delay(100);
             if (NetworkManager.ConnectedClients.Count == 6)
                 StartCoroutine(ComenzarPartida());

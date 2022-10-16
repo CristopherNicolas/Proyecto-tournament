@@ -17,10 +17,13 @@ public class MenuPrincipal : MonoBehaviour
 
     void CacheComponents()
     {
-        CrearPartida = GameObject.Find("BotonCrearPartida").GetComponent<Button>();
-        unirsePartida = GameObject.Find("Boton opciones").GetComponent<Button>();
+        CrearPartida = GameObject.Find("Boton crear partida").GetComponent<Button>();
+        unirsePartida = GameObject.Find("Boton Opciones").GetComponent<Button>();
         panelOpciones=GameObject.Find("Panel opciones").GetComponent<RectTransform>();
-        panelCrearParida = GameObject.Find("panel opciones").GetComponent<RectTransform>();
+       // panelCrearParida = GameObject.Find("panel opciones").GetComponent<RectTransform>();
+    }
+    public void CrearPartidaFunc()
+    {
 
     }
 }

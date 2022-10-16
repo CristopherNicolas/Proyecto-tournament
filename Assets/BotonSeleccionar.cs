@@ -10,7 +10,7 @@ public class BotonSeleccionar : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(
             () =>
             {
-                GameManager.instance.
+                //GameManager.instance.
             });
     }
 }
