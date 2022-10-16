@@ -468,8 +468,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1627382251}
         m_TargetAssemblyTypeName: SeleccionPersonaje, Assembly-CSharp
-        m_MethodName: CambiarPersonajeAElegir
-        m_Mode: 5
+        m_MethodName: AceptarPersonaje
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -608,7 +608,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: nombre3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1052840183
@@ -741,7 +741,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: nombre2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1247836620
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f634debcff0f245a77ba48923b2609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  estaSeleccionandoPersonaje: 0
+  estaSeleccionandoPersonaje: 1
 --- !u!4 &1627382249
 Transform:
   m_ObjectHideFlags: 0
@@ -858,7 +858,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombreASeleccionar: 
-  personajeList: []
+  personajeList:
+  - {fileID: 8660738697118820855, guid: 8d1240cfdd8e49443a2e372dbd96ff58, type: 3}
+  - {fileID: 8660738697118820855, guid: 2be9ffc1ab4955c48b3f6223d0de5cfe, type: 3}
+  - {fileID: 8660738697118820855, guid: 18890f79fe8b4a647a933d0533ac7bf4, type: 3}
 --- !u!1 &1919931286
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +954,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: nombre1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1919931289

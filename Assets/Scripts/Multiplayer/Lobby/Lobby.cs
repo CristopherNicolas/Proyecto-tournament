@@ -11,8 +11,9 @@ using TMPro;
 public class Lobby : NetworkBehaviour
 {
     
-    public bool estaSeleccionandoPersonaje;
+    public bool estaSeleccionandoPersonaje=true;
     public static Lobby instance;
+    bool isServer;
     //seleccionar personaje
     private IEnumerator Start()
     {
@@ -27,16 +28,19 @@ public class Lobby : NetworkBehaviour
         StartCoroutine(Coneccion());
         yield break;
     }
-    //ir a la escena index=3
     //establecer coneccion
     public IEnumerator Coneccion()
     {
-        if(NetworkManager.Singleton.ConnectedClientsList.Count == 0) ConectarServer();
-        else
+        //ir a la escena index=3
+        SceneManager.LoadScene(2);
+        if (GameManager.instance.estaSiendoServer) ConectarHost();
+        else ConectarHost();
+        while (true)
         {
-            Debug.Log($"clientes concectados : {NetworkManager.Singleton.ConnectedClientsList.Count}");
-            ConectarCliente();
+            yield return new WaitForEndOfFrame();
+            print("clientes conectados ="+NetworkManager.Singleton.ConnectedClients.Count);
         }
+
         yield break;
 
     }

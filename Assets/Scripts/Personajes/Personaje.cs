@@ -8,8 +8,10 @@ using UnityEngine;
 public abstract class Personaje : MonoBehaviour
 {
     public string nombrePersonaje;
-    public float vida=100,energia=100;
-    public float h1c=3, h2c=7, h3c=16;
+    public float vida = 100, energia = 100;
+    public int damage = 20;
+    public int speed = 8;
+    public float h1c = 3, h2c = 7, h3c = 16;
     public float tiempoInvulnerabilidad = 5;
 
     public virtual void CambiarCooldowns(float _h1c, float _h2c, float _h3c)

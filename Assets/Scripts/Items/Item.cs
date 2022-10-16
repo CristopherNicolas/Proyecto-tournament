@@ -1,4 +1,4 @@
-using System.Collections;
+//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -6,10 +6,25 @@ using UnityEngine;
 /// </summary>
 public abstract class Item : MonoBehaviour
 {
-    public float tiempoSpawn, tiempoActivo;
+    public float tiempoSpawn = 2, tiempoActivo;
+    public GameObject consumibleObject;
     public virtual void Efecto()
     {
+        consumibleObject.SetActive(false);
+    }
+
+    public virtual void respawn()
+    {
+        consumibleObject.SetActive(true);
 
     }
+
+    public virtual void OnTriggerEnter(Collider other)
+    {
+
+
+    }
+
+
 
 }

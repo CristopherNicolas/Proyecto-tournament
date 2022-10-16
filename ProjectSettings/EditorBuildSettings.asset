@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Loby.unity
     guid: 1101dc13c6cb0e642899f75aa1689f5f
   - enabled: 1
-    path: Assets/Scenes/test.unity
+    path: Assets/Scenes/test(new).unity
     guid: fdcd6399757d5004b830ead8962e5840
   m_configObjects: {}

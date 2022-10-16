@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.UI;
 using System.Linq;
 public class SeleccionPersonaje : MonoBehaviour
@@ -12,10 +13,13 @@ public class SeleccionPersonaje : MonoBehaviour
     GameManager.instance.personajeSeleccionadoEnLobby = ObtenerClaseSeleccionada(nombreASeleccionar);
     public GameObject  ObtenerClaseSeleccionada(string nombre)
     {
-        var q= personajeList.Where
-            (p => p.GetComponent<Personaje>()
-            .nombrePersonaje == nombre).First();
+
+        var q = from GameObject g in personajeList
+                where g.GetComponent<Personaje>().nombrePersonaje ==nombre
+                select g;
+
+        Debug.Log($"{q.First()}");
         Lobby.instance.estaSeleccionandoPersonaje = false;
-        return q;
+        return q.First();
     }
 }
