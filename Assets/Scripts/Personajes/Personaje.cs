@@ -32,6 +32,21 @@ public abstract class Personaje : MonoBehaviour
         energia -= 30;
 
     }
+    private void Update()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            habilidad1();
+        }
+          else if(Input.GetKeyDown(KeyCode.E))
+         {
+          habilidad2();
+         }
+        else if(Input.GetKeyDown(KeyCode.Q))
+        {
+            habilidad3();
+        }
+    }
     public virtual void Pasiva()
     {
 

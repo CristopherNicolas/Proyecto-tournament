@@ -47,17 +47,8 @@ public class Tanque : Personaje
     //public void Update()
     //{
 
-    //    move();
 
-    //   if (Input.GetMouseButton(1))
-    //   {
-    //        habilidad1();
-    //   }
-
-    //   else if(Input.GetKeyDown(KeyCode.E))
-    //   {
-    //        habilidad2();
-    //   }
+    //   
     //}
 
     IEnumerator activateShield()
