@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Netcode;
 
-public class EsferaAural : MonoBehaviour
+public class EsferaAural : NetworkBehaviour
 {
     public Personaje personajeEsfera;
     public List<Vector3> posicionesVectores;
-    /// <summary>
-    /// se llama cuando se inicia la escena 
-    /// </summary>
-    /// <param name="obj"></param>
-    public void Personaje(GameObject obj)
-    {
-        Personaje personaje = obj.GetComponent<Personaje>();
-        // remover script personaje del fps
-        personajeEsfera = personaje;
-    }
+    
     private void OnCollisionEnter(Collision collision)
     {
+        if (!IsOwner) return;
         if (collision.gameObject.GetComponent<FirstPersonMovement>()
             && ! collision.transform.GetComponent<Personaje>())
         {

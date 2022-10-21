@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class weaponSwitching : MonoBehaviour
+public class weaponSwitching : NetworkBehaviour
 {
     public int selectedWeapon = 0;
     // Start is called before the first frame update
@@ -14,6 +15,11 @@ public class weaponSwitching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!IsOwner)
+        {
+            return;
+            //psible bug  de cambio de arma aqui, quiza hay que desactivar componenete
+        }
         int previousSelectedWeapon = selectedWeapon;
 
         #region rueda del mouse
@@ -77,6 +83,7 @@ public class weaponSwitching : MonoBehaviour
 
     void chooseWeapon() //activa y desactiva las armas (para la seleccionar una arma activa)
     {
+        if (!IsOwner) return;
         int i = 0;
         foreach (Transform weapon in transform) //Revisa el transforms de los childs con el transform actual
         {

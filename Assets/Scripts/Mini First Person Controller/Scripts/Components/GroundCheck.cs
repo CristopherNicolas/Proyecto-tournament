@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-
+using Unity.Netcode;
 [ExecuteInEditMode]
-public class GroundCheck : MonoBehaviour
+public class GroundCheck : NetworkBehaviour
 {
     [Tooltip("Maximum distance from the ground.")]
     public float distanceThreshold = .15f;
@@ -20,6 +20,7 @@ public class GroundCheck : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!IsOwner) return;
         // Check if we are grounded now.
         bool isGroundedNow = Physics.Raycast(RaycastOrigin, Vector3.down, distanceThreshold * 2);
 
