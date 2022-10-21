@@ -26,7 +26,11 @@ public class FirstPersonLook : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner) return;
+        if (!IsOwner)
+        {
+            enabled = false;
+            return;
+        }
         // Get smooth velocity.
         Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);

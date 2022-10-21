@@ -5738,7 +5738,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6d7644c0e9bf3d46a38d9b3acd57cca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11117,7 +11117,7 @@ GameObject:
   - component: {fileID: 8764257301377175993}
   - component: {fileID: 3699918130239173274}
   - component: {fileID: -5823184262577929556}
-  - component: {fileID: -485093640782039823}
+  - component: {fileID: -3998161758013073915}
   m_Layer: 0
   m_Name: soporte
   m_TagString: Untagged
@@ -11262,7 +11262,7 @@ MonoBehaviour:
   bornPoint: {fileID: 0}
   healtSphere: {fileID: 0}
   healtRB: {fileID: 0}
---- !u!114 &-485093640782039823
+--- !u!114 &-3998161758013073915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11271,7 +11271,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8660738697118820855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ecadba7830cab54a93061b3c67156a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1
@@ -11556,7 +11556,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6d7644c0e9bf3d46a38d9b3acd57cca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -26,7 +26,12 @@ public class FirstPersonMovement : NetworkBehaviour
 
     void FixedUpdate()
     {
-        if (!IsOwner) return;
+        if (!IsOwner)
+        {
+            transform.GetChild(0).GetComponent<Camera>().enabled = false;
+            enabled = false;
+        return;
+        }
         // Update IsRunning from input.
         IsRunning = canRun && Input.GetKey(runningKey);
 

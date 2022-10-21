@@ -33,15 +33,16 @@ public class Lobby : NetworkBehaviour
     {
         //ir a la escena index=3
         SceneManager.LoadScene(2);
-        if (GameManager.instance.estaSiendoServer) ConectarHost();
-        else ConectarHost();
+        if (GameManager.instance.estaSiendoServer) ConectarServer();
+        else ConectarCliente();
         while (true)
         {
             yield return new WaitForEndOfFrame();
+            if(IsHost)
             print("clientes conectados ="+NetworkManager.Singleton.ConnectedClients.Count);
         }
 
-        yield break;
+        //yield break;
 
     }
     //mostrar pantalla de loby
