@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Unity.Netcode;
+using System.Threading.Tasks;
 
 public class EsferaAural : NetworkBehaviour
 {
@@ -18,6 +19,16 @@ public class EsferaAural : NetworkBehaviour
             //añadir personajeEsfera al fps con el que coliciona
             Destroy(gameObject);
         }
+    }
+    private async void Start()
+    {
+        await Task.Delay(2100);
+        GetComponent<NetworkObject>().SpawnWithOwnership(GetComponent<NetworkObject>().OwnerClientId);
+    }
+    public override void OnNetworkSpawn()
+    {
+        Debug.Log("spawn flag");
+        base.OnNetworkSpawn();
     }
     private void Update()
     {

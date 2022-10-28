@@ -11116,10 +11116,9 @@ GameObject:
   - component: {fileID: 8764451108461530515}
   - component: {fileID: 8764257301377175993}
   - component: {fileID: 3699918130239173274}
-  - component: {fileID: 855295210224724135}
   - component: {fileID: 1717432539496988272}
   m_Layer: 0
-  m_Name: DPS
+  m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11238,30 +11237,6 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &855295210224724135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8660738697118820855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983c77446f6bf7946bdd8c97032cf9d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nombrePersonaje: nombre1
-  vida: 100
-  energia: 100
-  damage: 20
-  speed: 8
-  h1c: 3
-  h2c: 7
-  h3c: 16
-  tiempoInvulnerabilidad: 5
-  knife: {fileID: 0}
-  pointKnife: {fileID: 0}
-  originKnife: {fileID: 0}
 --- !u!114 &1717432539496988272
 MonoBehaviour:
   m_ObjectHideFlags: 0

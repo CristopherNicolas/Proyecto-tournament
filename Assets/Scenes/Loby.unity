@@ -859,9 +859,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombreASeleccionar: 
   personajeList:
-  - {fileID: 8660738697118820855, guid: 8d1240cfdd8e49443a2e372dbd96ff58, type: 3}
   - {fileID: 8660738697118820855, guid: 2be9ffc1ab4955c48b3f6223d0de5cfe, type: 3}
   - {fileID: 8660738697118820855, guid: 18890f79fe8b4a647a933d0533ac7bf4, type: 3}
+  - {fileID: 8660738697118820855, guid: 726219d3b90deee4aae23faca09a0c13, type: 3}
 --- !u!1 &1919931286
 GameObject:
   m_ObjectHideFlags: 0

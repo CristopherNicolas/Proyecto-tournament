@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public Personaje personajeActual;
-    public GameObject personajeSeleccionadoEnLobby;
+    public Personaje personajeSeleccionadoEnLobby;
     public bool estaSiendoServer = false;
     private void Awake()
     {

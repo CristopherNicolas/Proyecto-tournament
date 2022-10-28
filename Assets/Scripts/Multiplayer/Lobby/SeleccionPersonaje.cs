@@ -10,13 +10,13 @@ public class SeleccionPersonaje : MonoBehaviour
     public List<GameObject> personajeList = new List<GameObject>();
     public void CambiarPersonajeAElegir(string nombre) => nombreASeleccionar = nombre;
     public void AceptarPersonaje()=>
-    GameManager.instance.personajeSeleccionadoEnLobby = ObtenerClaseSeleccionada(nombreASeleccionar);
-    public GameObject  ObtenerClaseSeleccionada(string nombre)
+    GameManager.instance.personajeSeleccionadoEnLobby= ObtenerClaseSeleccionada(nombreASeleccionar);
+    public Personaje  ObtenerClaseSeleccionada(string nombre)
     {
 
         var q = from GameObject g in personajeList
                 where g.GetComponent<Personaje>().nombrePersonaje ==nombre
-                select g;
+                select g.GetComponent<Personaje>();
 
         Debug.Log($"{q.First()}");
         Lobby.instance.estaSeleccionandoPersonaje = false;

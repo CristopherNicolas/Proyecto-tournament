@@ -1,0 +1,4 @@
+-El cliente puede ver otra instancia del fps // resuelto
+-multiples audiolisteners en escena
+ solucion?:
+al iniciar, obtener los audiolisteners, luego:

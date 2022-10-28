@@ -10,47 +10,25 @@ using System.Linq;
 using TMPro;
 public class Lobby : NetworkBehaviour
 {
-    
     public bool estaSeleccionandoPersonaje=true;
-    public static Lobby instance;
     bool isServer;
+    public static Lobby instance;
+   
     //seleccionar personaje
     private IEnumerator Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else Destroy(gameObject);
+        instance ??= this;
         yield return new WaitUntil(() => !estaSeleccionandoPersonaje);
         Debug.Log($"ha seleccionado personaje: {GameManager.instance.personajeSeleccionadoEnLobby.name}");
         StartCoroutine(Coneccion());
         yield break;
     }
-    //establecer coneccion
+    //Ir a La escena de juego
     public IEnumerator Coneccion()
     {
         //ir a la escena index=3
         SceneManager.LoadScene(2);
-        if (GameManager.instance.estaSiendoServer) ConectarServer();
-        else ConectarCliente();
-        while (true)
-        {
-            yield return new WaitForEndOfFrame();
-            if(IsHost)
-            print("clientes conectados ="+NetworkManager.Singleton.ConnectedClients.Count);
-        }
-
-        //yield break;
-
+        //yield return new WaitForSecondsRealtime(2);
+        yield break;
     }
-    //mostrar pantalla de loby
-    // cuando los 6 integrantes esten conectados, cerrar la pantalla de carga
-    //comenzar juego
-
-
-    public void ConectarCliente() => NetworkManager.Singleton.StartClient();
-    public void ConectarHost() => NetworkManager.Singleton.StartHost();
-    public void ConectarServer() => NetworkManager.Singleton.StartServer();
 }

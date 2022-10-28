@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Unity.Netcode;
+using System.Linq;
 
 public class FirstPersonMovement : NetworkBehaviour
 {
@@ -16,14 +18,22 @@ public class FirstPersonMovement : NetworkBehaviour
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
 
-
-
     void Awake()
     {
         // Get the rigidbody on this.
         rb = GetComponent<Rigidbody>();
     }
-
+    public  override void OnNetworkSpawn()
+    {
+        if (IsHost || IsServer)
+            StartCoroutine(DestroyListeners());
+        base.OnNetworkSpawn();
+    }
+    IEnumerator DestroyListeners()
+    {
+       //destruir audioslisteners
+        yield break;
+    }
     void FixedUpdate()
     {
         if (!IsOwner)
