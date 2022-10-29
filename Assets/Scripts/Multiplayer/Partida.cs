@@ -10,7 +10,6 @@ public partial class Partida : NetworkBehaviour
 {
     public bool haComenzadoLaPartida=false; 
     public static Partida instance;
-    public List<EsferaAural> esferasEnEscena;
     private void Start()
     {
         if (GameManager.instance.estaSiendoServer) ConectarHost();
@@ -27,16 +26,33 @@ public partial class Partida : NetworkBehaviour
 /// </summary>
 public partial class Partida : NetworkBehaviour
 {
-    public void DesactivarAudioListeners()
-    {
-        
-    }
+    public List<GameObject> esferasEnEscena,posiciones;
+    public GameObject prefabEsferaAural;
     IEnumerator EsperarPorLosDemas()
     {
-        if(!IsHost) yield break;
+        if (!IsHost) yield break;
         while (NetworkManager.Singleton.ConnectedClientsList.Count < 6) yield return new WaitForEndOfFrame();
-                Debug.Log("6 clientes conectados, comenzando partida");
-            yield break;
+        Debug.Log("6 clientes conectados, comenzando partida");
+        GenerarEsferasAurales();
+        yield break;
+    }
+    //instanciar 6 esferas aurales, a cada una añadir la clase seleccionada del game manager
+    public void GenerarEsferasAurales()
+    {
+        var arrEsferas = new List<GameObject>();
+
+        for (int i = 0; i < 6; i++)
+        {
+            //isntanciar en un empty, osea comprobar si hay childs, si hay pasar a otra
+            foreach (var item in posiciones)
+            {
+               var obj =  Instantiate(prefabEsferaAural, item.transform);
+                // bug, deben agregarse los personajes de cada cliente
+                obj.GetComponent<EsferaAural>().personajeEsfera = GameManager.instance.personajeSeleccionadoEnLobby;
+                obj.GetComponent<NetworkObject>().Spawn();
+                esferasEnEscena.Add(obj);
+            }
+        }
     }
 }
 

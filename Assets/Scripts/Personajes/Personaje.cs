@@ -34,6 +34,7 @@ public abstract class Personaje : MonoBehaviour
     }
     private void Update()
     {
+        
         if (Input.GetMouseButton(1))
         {
             habilidad1();
