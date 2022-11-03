@@ -35,7 +35,7 @@ public abstract class Personaje : MonoBehaviour
     private void Update()
     {
         
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             habilidad1();
         }
@@ -51,5 +51,14 @@ public abstract class Personaje : MonoBehaviour
     public virtual void Pasiva()
     {
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        vida -= damage;
+        if (vida <= 0)
+        {
+            Debug.Log("Player Die");
+        }
     }
 }

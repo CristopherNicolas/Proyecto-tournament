@@ -6,6 +6,10 @@ TagManager:
   tags:
   - target
   - PantallaCarga
+  - blue
+  - red
+  - blueShield
+  - redShield
   layers:
   - Default
   - TransparentFX
@@ -13,11 +17,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - dps
+  - soporte
+  - tanque
+  - shieldRed
+  - shieldBlue
   - 
   - 
   - 
