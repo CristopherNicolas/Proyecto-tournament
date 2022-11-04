@@ -862,11 +862,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: a45a992b-fe60-42bb-8261-7b70a41f06ee
+  cloudProjectId: 702393b0-f8a0-4309-a7f7-4ac79866ca1f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: project tournament
-  organizationId: cristopher_faundez_uniacc_edu
+  projectName: Project tournament
+  organizationId: uniacc-team
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
