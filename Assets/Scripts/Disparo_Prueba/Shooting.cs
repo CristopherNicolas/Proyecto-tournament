@@ -86,6 +86,7 @@ public class Shooting : MonoBehaviour
 
     void shoot()
     {
+        if (player == null) player = transform.root.gameObject;
         muzzleFlash.Play(); //play particulas
         currentAmmo--; //Restar munición(1)
 

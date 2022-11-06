@@ -9,8 +9,11 @@ public class SeleccionPersonaje : MonoBehaviour
     public string nombreASeleccionar;
     public List<GameObject> personajeList = new List<GameObject>();
     public void CambiarPersonajeAElegir(string nombre) => nombreASeleccionar = nombre;
-    public void AceptarPersonaje()=>
-    GameManager.instance.personajeSeleccionadoEnLobby= ObtenerClaseSeleccionada(nombreASeleccionar);
+    public void AceptarPersonaje()
+    {
+     GameManager.instance.personajeSeleccionadoEnLobby= ObtenerClaseSeleccionada(nombreASeleccionar);
+        LobbyRelay._instance.FindMatch();
+    }
     public Personaje  ObtenerClaseSeleccionada(string nombre)
     {
 
@@ -19,7 +22,7 @@ public class SeleccionPersonaje : MonoBehaviour
                 select g.GetComponent<Personaje>();
 
         Debug.Log($"{q.First()}");
-        Lobby.instance.estaSeleccionandoPersonaje = false;
+        //Lobby1.instance.estaSeleccionandoPersonaje = false; arreglar
         return q.First();
     }
 }

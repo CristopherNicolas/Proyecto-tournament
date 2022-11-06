@@ -12,13 +12,16 @@ public partial class Partida : NetworkBehaviour
     public static Partida instance;
     private void Start()
     {
-        if (GameManager.instance.estaSiendoServer) ConectarHost();
-        else ConectarCliente();
         StartCoroutine(EsperarPorLosDemas());
     }
-    public void ConectarCliente() => NetworkManager.Singleton.StartClient();
-    public void ConectarHost() => NetworkManager.Singleton.StartHost();
-    public void ConectarServer() => NetworkManager.Singleton.StartServer();
+    //{
+    //    if (GameManager.instance.estaSiendoServer) ConectarHost();
+    //    else ConectarCliente();
+    //    StartCoroutine(EsperarPorLosDemas());
+    //}
+    //public void ConectarCliente() => NetworkManager.Singleton.StartClient();
+    //public void ConectarHost() => NetworkManager.Singleton.StartHost();
+    //public void ConectarServer() => NetworkManager.Singleton.StartServer();
 
 }
 /// <summary>
