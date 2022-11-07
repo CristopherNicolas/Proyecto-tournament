@@ -66,7 +66,7 @@ public class LobbyRelay : MonoBehaviour
         // Player with id connected to our session
 
         Debug.Log("Connected player with id: " + id);
-
+        GameManager.instance.numIdPlayer = (int)id;
         UpdateState?.Invoke("Player found!");
         MatchFound?.Invoke();
     }

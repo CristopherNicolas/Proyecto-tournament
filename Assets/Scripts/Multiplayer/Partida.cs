@@ -27,6 +27,7 @@ public partial class Partida : NetworkBehaviour
         if (!IsHost) yield break;
         while (NetworkManager.Singleton.ConnectedClientsList.Count < 6) yield return new WaitForEndOfFrame();
         Debug.Log("6 clientes conectados, comenzando partida");
+        haComenzadoLaPartida=true;
         GenerarEsferasAurales();
         yield break;
     }

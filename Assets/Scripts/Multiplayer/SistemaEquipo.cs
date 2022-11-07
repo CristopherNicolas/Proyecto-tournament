@@ -1,18 +1,14 @@
 using UnityEngine;
 using Unity.Netcode;
+using Unity.Services.Lobbies;
 /// <summary>
 /// Contiene las estadisticas del equipo ademas de la asignacion de el jugador
 /// </summary>
-class TeamSystem : NetworkBehaviour
+class TeamSystem 
 {
     private string isBlueTeam;
     private int tickets=100;    
-    public void AssignTeam(GameObject playerObject)
-    {
-        
-        // cada 3 jugadores, que se unan crear un equipo
-         playerObject.transform.tag = NetworkObject.OwnerClientId>3 ? "red" : "blue";
-    }
+    
         
 
 }
