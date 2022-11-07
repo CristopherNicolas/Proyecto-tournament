@@ -5,10 +5,11 @@ using Unity.Netcode;
 /// </summary>
 class TeamSystem : NetworkBehaviour
 {
-    private string colorTeam;
+    private string isBlueTeam;
     private int tickets=100;    
     public void AssignTeam(GameObject playerObject)
     {
+        
         // cada 3 jugadores, que se unan crear un equipo
          playerObject.transform.tag = NetworkObject.OwnerClientId>3 ? "red" : "blue";
     }

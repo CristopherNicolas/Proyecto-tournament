@@ -161,8 +161,7 @@ public class LobbyRelay : MonoBehaviour
 
             // Finally start the client
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-            await Task.Delay(2000);
-            NetworkManager.Singleton.StartClient();
+            //NetworkManager.Singleton.StartClient();
 
             // Trigger events
             UpdateState?.Invoke("Match found!");
@@ -239,9 +238,9 @@ public class LobbyRelay : MonoBehaviour
                 _hostData.ConnectionData);
 
             // Finally start host
+            GameManager.instance.estaSiendoServer = true;
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-            await Task.Delay(2000);
-            NetworkManager.Singleton.StartHost();
+            //NetworkManager.Singleton.StartHost();
 
             UpdateState?.Invoke("Waiting for players...");
         }

@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/lobby2.unity
     guid: ebaa9b3bd130cbc439f258b8e506534c
   - enabled: 1
-    path: Assets/Scenes/test(new).unity
+    path: Assets/Scenes/Mapa.unity
     guid: fdcd6399757d5004b830ead8962e5840
   m_configObjects: {}

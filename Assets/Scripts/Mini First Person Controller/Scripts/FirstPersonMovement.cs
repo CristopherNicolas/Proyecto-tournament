@@ -27,6 +27,7 @@ public class FirstPersonMovement : NetworkBehaviour
     {
         if (IsHost || IsServer)
             StartCoroutine(DestroyListeners());
+
         base.OnNetworkSpawn();
     }
     IEnumerator DestroyListeners()

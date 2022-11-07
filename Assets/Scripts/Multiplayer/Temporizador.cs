@@ -7,6 +7,8 @@ using DG.Tweening;
 using System.Linq;
 using System.Threading.Tasks;
 using Unity.Netcode;
+using Unity.Services.Relay;
+
 public class Temporizador : NetworkBehaviour
 {
     public TMP_Text tiempoTexto;
@@ -17,6 +19,7 @@ public class Temporizador : NetworkBehaviour
     private IEnumerator Start()
     {
         //yield return new WaitUntil(() => GetComponent<Partida>().haComenzadoLaPartida);
+       
         if (IsHost) 
             while (true)
         {
