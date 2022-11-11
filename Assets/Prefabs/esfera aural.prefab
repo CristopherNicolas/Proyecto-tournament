@@ -94,11 +94,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712271781363736948}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.7215822
+  m_Center: {x: -0.002845049, y: 0, z: 0}
 --- !u!114 &1712271781363736951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,13 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personajeEsfera: {fileID: 0}
-  posicionesVectores:
-  - {x: -12.129418, y: 2.06, z: -21.41923}
-  - {x: -12.129418, y: 2.0600004, z: 28.1}
-  - {x: -35.96, y: 2.06, z: -21.41923}
-  - {x: -35.96, y: 2.0600004, z: 28.1}
-  - {x: 27.41, y: 2.06, z: -21.41923}
-  - {x: 27.41, y: 2.0600004, z: 28.1}
 --- !u!114 &1712271781363736946
 MonoBehaviour:
   m_ObjectHideFlags: 0

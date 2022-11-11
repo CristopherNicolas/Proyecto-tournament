@@ -6,9 +6,6 @@ using Unity.Services.Lobbies;
 /// </summary>
 class TeamSystem 
 {
-    private string isBlueTeam;
-    private int tickets=100;    
-    
-        
+   
 
 }

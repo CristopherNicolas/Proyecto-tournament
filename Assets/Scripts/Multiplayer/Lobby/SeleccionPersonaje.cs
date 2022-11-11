@@ -22,7 +22,6 @@ public class SeleccionPersonaje : MonoBehaviour
                 select g.GetComponent<Personaje>();
 
         Debug.Log($"{q.First()}");
-        //Lobby1.instance.estaSeleccionandoPersonaje = false; arreglar
         return q.First();
     }
 }

@@ -8,15 +8,11 @@ public class AssignTeam : NetworkBehaviour
     private void Start()
     {
         //ownerClientID
-        AssignTeamFunc(gameObject);
-    }
-    public void AssignTeamFunc(GameObject playerObject)
-    {
         if (!IsOwner) return;
-        // cada 3 jugadores, que se unan crear un equipo
-        playerObject.transform.tag = NetworkObject.OwnerClientId > 2 ? "red" : "blue";
-        Debug.Log(NetworkObject.OwnerClientId);
+        gameObject.transform.tag =
+      (GetComponent<NetworkObject>().OwnerClientId > 2) ? "red" : "blue";
     }
+  
     [ClientRpc]
     public void SwapTeamClientRPC()
     {

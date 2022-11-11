@@ -19,6 +19,7 @@ public class Temporizador : NetworkBehaviour
     private IEnumerator Start()
     {
         yield return new WaitUntil(() => GetComponent<Partida>().haComenzadoLaPartida);
+        Debug.Log(GetComponent<Partida>().haComenzadoLaPartida);
        
         if (IsHost) 
             while (true)
