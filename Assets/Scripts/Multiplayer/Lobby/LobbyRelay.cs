@@ -128,6 +128,7 @@ public class LobbyRelay : MonoBehaviour
             // Quick-join a random lobby
             Lobby lobby = await Lobbies.Instance.QuickJoinLobbyAsync(options);
 
+
             Debug.Log("Joined lobby: " + lobby.Id);
             Debug.Log("Lobby Players: " + lobby.Players.Count);
 
@@ -267,7 +268,7 @@ public class LobbyRelay : MonoBehaviour
         // We need to delete the lobby when we're not using it
         Lobbies.Instance.DeleteLobbyAsync(_lobbyId);
     }
-
+    
     #endregion
 
     /// <summary>

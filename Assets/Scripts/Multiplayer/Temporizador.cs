@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Services.Relay;
-
+using Unity.Collections;
 public class Temporizador : NetworkBehaviour
 {
     public TMP_Text tiempoTexto;
@@ -18,24 +18,16 @@ public class Temporizador : NetworkBehaviour
 
     private IEnumerator Start()
     {
-        yield return new WaitUntil(() => GetComponent<Partida>().haComenzadoLaPartida);
-        Debug.Log(GetComponent<Partida>().haComenzadoLaPartida);
-       
-        if (IsHost) 
-            while (true)
+        if(IsHost)tiempo.Value = 0;
+        //yield return new WaitUntil(() => GetComponent<Partida>().haComenzadoLaPartida);
+        while (true)
         {
-            yield return new WaitForSeconds(1);
-            tiempo.Value += 1;
-            tiempoTexto.text = tiempo.Value.ToString();
-        }
-        else
-        {
-            while (true)
-            {
-                yield return new WaitForEndOfFrame();
+            if (IsHost) tiempo.Value++;
                 tiempoTexto.text = tiempo.Value.ToString();
-            }
-
-        }
+                  yield return new WaitForSecondsRealtime(1);
+                    
+        }                       
     }
+  
+
 }

@@ -122,6 +122,7 @@ public class Shooting : MonoBehaviour
                     {
                         hit.rigidbody.AddForce(-hit.normal * hitForce); //Empuje a objeto que se le disparo
                         Personaje player = hit.collider.gameObject.GetComponent<Personaje>();
+                        if (player is null) return;
                         player.TakeDamage(damage);
 
                         Debug.Log("+RED+ HIT -BLUE-");

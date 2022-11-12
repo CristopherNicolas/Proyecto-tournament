@@ -10,13 +10,15 @@ public class EsferaAural : NetworkBehaviour
     public Personaje personajeEsfera;    
     private void OnTriggerEnter(Collider other)
     {
-       // if (!IsOwner) return;
-        Debug.Log("triger enter");
-
-        if(IsOwner)
-        {   
+       if(other.gameObject.GetComponent<FirstPersonMovement>() != null)
+        {
+          if(IsOwner)
+          {   
             DestroyServerRPC();
+          }
+           
         }
+
     }
     [ServerRpc] void DestroyServerRPC()
     {
