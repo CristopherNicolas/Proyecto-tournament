@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooting : MonoBehaviour
+public class ShootingTank : MonoBehaviour
 {
     public float weaponRange = 100f; //Distancia máxima de disparo (raycast)
     public float fireRate = 0.25f; //Tiempo entre disparos
     private float nextFire;
     public float hitForce = 100f; //Empuja al objeto que se le dispara
     public float damage = 10f; //Daño de arma
-    public float damageOriginal = 10f;
+    public float damageOriginal = 10f; //daño original del arma
     public int maxAmmo = 10; //munición
     public int currentAmmo = 10;
     public float realoadTime = 1f; //tiempo de recarga
@@ -48,7 +48,7 @@ public class Shooting : MonoBehaviour
     {
         #region DrawRay(viewport)
         Vector3 lineOrigin = fpscam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); //Crea un vector en el centro de la camara del viewport (lineOrigin)
-        Debug.DrawRay(lineOrigin, fpscam.transform.forward*weaponRange, Color.green);
+        Debug.DrawRay(lineOrigin, fpscam.transform.forward * weaponRange, Color.green);
         #endregion
 
         if (isReloading)
@@ -66,6 +66,8 @@ public class Shooting : MonoBehaviour
         {
             shoot();
         }
+
+
     }
 
     IEnumerator Reload()
@@ -75,20 +77,11 @@ public class Shooting : MonoBehaviour
 
         //animator.SetBool("", true); // falta animacion
 
-        yield return new WaitForSeconds(realoadTime - 0.25f);
+        yield return new WaitForSecondsRealtime(realoadTime - 0.25f);
         //animator.SetBool("", false); // falta animacion
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSecondsRealtime(0.25f);
         currentAmmo = maxAmmo;
         isReloading = false;
-    }
-
-    public void damageIncrease()
-    {
-        damage = damage * 2;
-    }
-    public void resetdamage()
-    {
-        damage = damageOriginal;
     }
 
     void shoot()
@@ -155,7 +148,7 @@ public class Shooting : MonoBehaviour
                     #endregion
 
                     #region +RED+ VS -Blue- Shield
-                    if(hit.collider.gameObject.tag == "blueShield")//tag especificando el objeto que se le disparo
+                    if (hit.collider.gameObject.tag == "blueShield")//tag especificando el objeto que se le disparo
                     {
                         escudo shield = hit.collider.gameObject.GetComponent<escudo>();
                         shield.TakeDamage(damage);
@@ -213,7 +206,7 @@ public class Shooting : MonoBehaviour
 
                     if (hit.collider.gameObject.tag == "blue") //tag especificando el objeto que se le disparo
                     {
-                        Debug.Log("+RED+ HIT +RED+ [Atacaste un compañero]");
+                        Debug.Log("-Blue- HIT -Blue- [Atacaste un compañero]");
                     }
                     #endregion
 
@@ -229,129 +222,5 @@ public class Shooting : MonoBehaviour
             }
         }
         #endregion
-
-        #region PLAYER VS (NO forma equipo) NO USAR
-        /*if (player.gameObject.tag == "Player")
-        {
-
-        }
-        if (Physics.Raycast(rayOrigin, fpscam.transform.forward, out hit, weaponRange)) //Distancia y dirección del raycast, se puede cambiar el weapon range por Mathf.Infinity para hacer la distancia infinito
-        {
-            Debug.Log("Colision de disparo");
-
-            if (hit.rigidbody != null) //si colisiona con algo con rigidbody
-            {
-                GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
-                Destroy(impactoeffectGo, 2f);
-
-                #region Player VS Practice target
-                if (hit.collider.gameObject.tag == "target") //tag especificando el objeto que se le disparo
-                {
-                    hit.rigidbody.AddForce(-hit.normal * hitForce); //Empuje a objeto que se le disparo
-                    PracticeTarget target = hit.collider.gameObject.GetComponent<PracticeTarget>(); //Llama componente del script del target
-                    target.TakeDamage(damage); //Target recibe daño
-                }
-                #endregion
-
-                #region PlayerVSPlayer
-
-                #region PLAYER atacaste a PLAYER
-                if (hit.collider.gameObject.tag == "Player") //tag especificando el objeto que se le disparo
-                {
-                    hit.rigidbody.AddForce(-hit.normal * hitForce); //Empuje a objeto que se le disparo
-                    Personaje player = hit.collider.gameObject.GetComponent<Personaje>();
-                    player.TakeDamage(damage);
-
-                    Debug.Log("PLAYER HIT PLAYER");
-
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("dps"))
-                    {
-                        Debug.Log("PLAYER daño a DPS PLAYER");
-                    }
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("soporte"))
-                    {
-                        Debug.Log("PLAYER daño a Soporte PLAYER");
-                    }
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("tanque"))
-                    {
-                        Debug.Log("PLAYER daño a Tanque PLAYER");
-                    }
-                }
-                #endregion
-
-                #region PLAYER atacaste a blue
-                if (hit.collider.gameObject.tag == "blue") //tag especificando el objeto que se le disparo
-                {
-                    hit.rigidbody.AddForce(-hit.normal * hitForce); //Empuje a objeto que se le disparo
-                    Personaje player = hit.collider.gameObject.GetComponent<Personaje>();
-                    player.TakeDamage(damage);
-
-                    Debug.Log("PLAYER HIT -BLUE-");
-
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("dps"))
-                    {
-                        Debug.Log("PLAYER daño a DPS -Blue-");
-                    }
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("soporte"))
-                    {
-                        Debug.Log("PLAYER daño a Soporte -Blue-");
-                    }
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("tanque"))
-                    {
-                        Debug.Log("PLAYER daño a Tanque -Blue-");
-                    }
-                }
-                #endregion
-
-                #region PLAYER atacaste a red
-                if (hit.collider.gameObject.tag == "red") //tag especificando el objeto que se le disparo
-                {
-                    hit.rigidbody.AddForce(-hit.normal * hitForce); //Empuje a objeto que se le disparo
-                    Personaje player = hit.collider.gameObject.GetComponent<Personaje>();
-                    player.TakeDamage(damage);
-
-                    Debug.Log("PLAYER HIT +Red+");
-
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("dps"))
-                    {
-                        Debug.Log("PLAYER daño a DPS +Red+");
-                    }
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("soporte"))
-                    {
-                        Debug.Log("PLAYER daño a Soporte +Red+");
-                    }
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("tanque"))
-                    {
-                        Debug.Log("PLAYER daño a Tanque +Red+");
-                    }
-                }
-                #endregion
-
-                #endregion
-
-                #region shield
-                if (hit.collider.gameObject.tag == "blueShield") //tag especificando el objeto que se le disparo
-                {
-                    escudo shield = hit.collider.gameObject.GetComponent<escudo>();
-                    shield.TakeDamage(damage);
-                    Debug.Log("PALYER HIT -BLUE- SHIELD");
-                }
-                if (hit.collider.gameObject.tag == "redShield") //tag especificando el objeto que se le disparo
-                {
-                    escudo shield = hit.collider.gameObject.GetComponent<escudo>();
-                    shield.TakeDamage(damage);
-                    Debug.Log("PLAYER HIT +RED+ SHIELD");
-                }
-                if (hit.collider.gameObject.tag == "Default") //tag especificando el objeto que se le disparo
-                {
-                    escudo shield = hit.collider.gameObject.GetComponent<escudo>();
-                    shield.TakeDamage(damage);
-                    Debug.Log("PLAYER HIT +RED+ SHIELD");
-                }
-                #endregion
-            }
-        }*/
-        #endregion
     }
-
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DPS: Personaje
 {
+    public Shooting shooting;
     public GameObject knife, pointKnife;
     public Transform originKnife;
     public override void habilidad1()
@@ -20,10 +21,21 @@ public class DPS: Personaje
     {
         base.habilidad3();
     }
-    //public override void globalPasivaDaño()
-    //{
-    //    base.globalPasivaDaño();
-    //}
+    public override void PasivaDPS()
+    {
+        base.PasivaDPS();
+        if (multiple == true)
+        {
+            shooting.damageIncrease();
+            multiple = false;
+        }
+        if (resetDamage == true)
+        {
+            multiple = false;
+            shooting.resetdamage();
+            resetDamage = false;
+        }
+    }
 
     IEnumerator melee()
     {
@@ -35,6 +47,11 @@ public class DPS: Personaje
         yield break;
     }
 
+    /*public void Update()
+    {
+        
+    }*/
+
     //public void Update()
     //{
     //    move();
@@ -43,6 +60,6 @@ public class DPS: Personaje
     //    {
     //        habilidad1();          
     //    }
-       
+
     //}
 }
