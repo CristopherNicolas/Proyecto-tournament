@@ -5823,7 +5823,6 @@ MonoBehaviour:
   fireRate: 0.25
   hitForce: 100
   damage: 10
-  damageOriginal: 10
   maxAmmo: 10
   currentAmmo: 10
   realoadTime: 1
@@ -10734,7 +10733,6 @@ MonoBehaviour:
   fireRate: 0.1
   hitForce: 120
   damage: 5
-  damageOriginal: 10
   maxAmmo: 50
   currentAmmo: 50
   realoadTime: 1
@@ -11128,6 +11126,7 @@ GameObject:
   - component: {fileID: 8663131753948295775}
   - component: {fileID: 8777825813644699621}
   - component: {fileID: 8716506242935515345}
+  - component: {fileID: 99063779721065573}
   - component: {fileID: 8768293422918535275}
   - component: {fileID: 8764451108461530515}
   - component: {fileID: 8764257301377175993}
@@ -11135,7 +11134,7 @@ GameObject:
   - component: {fileID: 855295210224724135}
   - component: {fileID: 1717432539496988272}
   m_Layer: 6
-  m_Name: dps
+  m_Name: dpsNoNetwork
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11190,7 +11189,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &8768293422918535275
+--- !u!114 &99063779721065573
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11198,6 +11197,22 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8660738697118820855}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801f43966166af148a1d8ef0b0e74bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  canRun: 1
+  runSpeed: 9
+  runningKey: 304
+--- !u!114 &8768293422918535275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8660738697118820855}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97fca36bd81de7c4cafce7bbf02ca611, type: 3}
   m_Name: 
@@ -11280,7 +11295,6 @@ MonoBehaviour:
   tiempoInvulnerabilidad: 5
   canPasiva: 1
   multiple: 0
-  resetDamage: 0
   shooting: {fileID: 5799262135452596066}
   knife: {fileID: 0}
   pointKnife: {fileID: 0}
@@ -11369,6 +11383,7 @@ GameObject:
   - component: {fileID: 8682879786320010477}
   - component: {fileID: 8758195245253723723}
   - component: {fileID: 8725177248001516877}
+  - component: {fileID: 5334487333609370503}
   - component: {fileID: 8764016226212156193}
   - component: {fileID: 8764622903825029157}
   - component: {fileID: 8662483583989880959}
@@ -11454,7 +11469,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8661261629959003331}
   m_Enabled: 1
---- !u!114 &8764016226212156193
+--- !u!114 &5334487333609370503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11462,6 +11477,21 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8661261629959003331}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7747706b28b5f459b8930f1936c7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 8663131753948295775}
+  sensitivity: 2
+  smoothing: 1.5
+--- !u!114 &8764016226212156193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8661261629959003331}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec72980442fddac4d86e75ab24b4d027, type: 3}
   m_Name: 

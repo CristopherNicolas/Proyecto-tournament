@@ -21,8 +21,7 @@ public class Tanque : Personaje
             StartCoroutine(activateShield());
 
             Debug.Log("Escudo desplegado!");
-        }
-        
+        }   
     }
     public override void habilidad2()
     {
@@ -34,8 +33,6 @@ public class Tanque : Personaje
         GameObject bomb = Instantiate(granade, SkillPoint.transform.position, SkillPoint.transform.rotation) as GameObject;
         Granada granada = bomb.GetComponent<Granada>();
         granada.isNormalGranade = true;
-
-
     }
     
     public override void habilidad3()
@@ -45,10 +42,10 @@ public class Tanque : Personaje
         Granada granada = ulti.GetComponent<Granada>();
         granada.isNormalGranade = false;
     }
-    //public override void Pasiva()
-    //{
-    //    base.globalPasivaTanque();
-    //}
+    public override void PasivaTank()
+    {
+        base.PasivaTank();
+    }
 
     public void Start()
     {
@@ -80,7 +77,7 @@ public class Tanque : Personaje
         shieldSkill.transform.SetParent(shieldParent);
         shieldSkill.transform.SetParent(shieldParent, true);
 
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSecondsRealtime(30);
 
         shieldSkill.transform.SetParent(shieldParent, false);
         shield.isShield = false;

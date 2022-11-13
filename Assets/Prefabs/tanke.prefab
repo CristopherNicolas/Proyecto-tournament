@@ -5813,7 +5813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5799262135452596064}
-  - component: {fileID: 5799262135452596066}
+  - component: {fileID: 5070699375496103560}
   m_Layer: 0
   m_Name: gun_main
   m_TagString: Untagged
@@ -5838,7 +5838,7 @@ Transform:
   m_Father: {fileID: 5799262136310406206}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5799262135452596066
+--- !u!114 &5070699375496103560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5847,13 +5847,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5799262135452596071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1f3276fb47d96f4ea7137928258d662, type: 3}
+  m_Script: {fileID: 11500000, guid: c503e3df0b50a8542993bf0be080f77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRange: 100
   fireRate: 0.1
   hitForce: 120
   damage: 5
+  damageOriginal: 10
   maxAmmo: 50
   currentAmmo: 50
   realoadTime: 1
@@ -10723,7 +10724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5799262135958900398}
-  - component: {fileID: 5799262135958900399}
+  - component: {fileID: 1821781117404679125}
   m_Layer: 0
   m_Name: melee
   m_TagString: Untagged
@@ -10748,7 +10749,7 @@ Transform:
   m_Father: {fileID: 5799262136310406206}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5799262135958900399
+--- !u!114 &1821781117404679125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10757,13 +10758,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5799262135958900397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1f3276fb47d96f4ea7137928258d662, type: 3}
+  m_Script: {fileID: 11500000, guid: c503e3df0b50a8542993bf0be080f77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRange: 10
   fireRate: 0.25
   hitForce: 120
   damage: 20
+  damageOriginal: 10
   maxAmmo: 50
   currentAmmo: 50
   realoadTime: 1
@@ -11298,13 +11300,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombrePersonaje: nombre3
   vida: 100
+  maxvida: 100
   energia: 100
+  Move: 0
   damage: 20
+  damageRecibe: 0
   speed: 8
   h1c: 3
   h2c: 7
   h3c: 16
   tiempoInvulnerabilidad: 5
+  canPasiva: 1
+  multiple: 0
+  resetDamage: 0
   player: {fileID: 8660738697118820855}
   Shield: {fileID: 4760433127497065325, guid: 63ce254a8d93a404484a3cd77b55a537, type: 3}
   SkillPoint: {fileID: 378417811}
