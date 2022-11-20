@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShootingTank : MonoBehaviour
 {
+    public tank_animation tankanim;
+
     public float weaponRange = 100f; //Distancia máxima de disparo (raycast)
     public float fireRate = 0.25f; //Tiempo entre disparos
     private float nextFire;
@@ -86,6 +88,8 @@ public class ShootingTank : MonoBehaviour
 
     void shoot()
     {
+        tankanim.onShootAnimActive(); //anim
+
         if (player == null) player = transform.root.gameObject;
         muzzleFlash.Play(); //play particulas
         currentAmmo--; //Restar munición(1)

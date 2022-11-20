@@ -27,6 +27,7 @@ public class move_noNetwork : MonoBehaviour
     void FixedUpdate()
     {
 
+
         // Update IsRunning from input.
         IsRunning = canRun && Input.GetKey(runningKey);
 
