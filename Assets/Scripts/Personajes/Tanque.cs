@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tanque : Personaje
 {
+    public tank_animation tankAnim;
+
     [SerializeField] public GameObject player;
     public GameObject Shield, SkillPoint, granade, ultiBomb;
     public bool canShield = true;
@@ -30,6 +32,9 @@ public class Tanque : Personaje
         /* GameObject bomb = Instantiate(granade, shieldPoint.transform.position, Quaternion.identity) as GameObject;
          rbGranade.AddForce(transform.forward * 20, ForceMode.Impulse);
          granada.arrojarGranada();*/
+
+        tankAnim.bombShootAnimActive(); //anim
+
         GameObject bomb = Instantiate(granade, SkillPoint.transform.position, SkillPoint.transform.rotation) as GameObject;
         Granada granada = bomb.GetComponent<Granada>();
         granada.isNormalGranade = true;
@@ -38,6 +43,9 @@ public class Tanque : Personaje
     public override void habilidad3()
     {
         base.habilidad3();
+
+        tankAnim.onUltimateAnimActive(); //anim
+
         GameObject ulti = Instantiate(ultiBomb, SkillPoint.transform.position, SkillPoint.transform.rotation) as GameObject;
         Granada granada = ulti.GetComponent<Granada>();
         granada.isNormalGranade = false;
@@ -52,15 +60,15 @@ public class Tanque : Personaje
         //Shield.SetActive(false);
     }
 
-    //public void Update()
-    //{
+    public void Update()
+    {
 
-
-    //   
-    //}
+    }
 
     IEnumerator activateShield()
     {
+        tankAnim.onShieldAnimActive(); //anim
+
         GameObject shieldSkill = Instantiate(Shield, SkillPoint.transform.position, SkillPoint.transform.rotation) as GameObject;
         escudo shield = shieldSkill.GetComponent<escudo>();
         if (player.gameObject.tag == "red")
@@ -77,7 +85,15 @@ public class Tanque : Personaje
         shieldSkill.transform.SetParent(shieldParent);
         shieldSkill.transform.SetParent(shieldParent, true);
 
+        if (shield.lifeOfShield <= 0)
+        {
+            tankAnim.onShieldAnimFalse();//anim
+        }
+
         yield return new WaitForSecondsRealtime(30);
+
+        tankAnim.onShieldAnimFalse();//anim
+
 
         shieldSkill.transform.SetParent(shieldParent, false);
         shield.isShield = false;
