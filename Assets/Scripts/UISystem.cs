@@ -9,6 +9,7 @@ public class UISystem : MonoBehaviour
 {
     public static UISystem uISystem;
     public TMP_Text feed;
+    
 
     private void Awake()
     {
@@ -16,6 +17,11 @@ public class UISystem : MonoBehaviour
         {
             uISystem = this;
         }
+    }
+    private IEnumerator Start()
+    {
+        yield return new WaitForSecondsRealtime(3);
+        feed.text = "";
     }
     public void ShowMessajeUI(string text)
     {

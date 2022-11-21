@@ -131,6 +131,7 @@ public abstract class Personaje : MonoBehaviour
         if (vida <= 0)
         {
             Debug.Log("Player Die");
+            Partida.instance.QuitarTicketServerRpc(gameObject.CompareTag("blue") ? "blue":"red");
         }
     }
 

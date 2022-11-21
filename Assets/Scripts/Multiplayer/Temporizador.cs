@@ -16,18 +16,18 @@ public class Temporizador : NetworkBehaviour
         (readPerm: NetworkVariableReadPermission.Everyone,
         writePerm: NetworkVariableWritePermission.Owner);
 
-    private IEnumerator Start()
-    {
-        if(IsHost)tiempo.Value = 0;
-        //yield return new WaitUntil(() => GetComponent<Partida>().haComenzadoLaPartida);
-        while (true)
-        {
-            if (IsHost) tiempo.Value++;
-                tiempoTexto.text = tiempo.Value.ToString();
-                  yield return new WaitForSecondsRealtime(1);
+    //private IEnumerator Start()
+    //{
+    //    if (!IsOwner) yield break;
+    //    if(IsHost)tiempo.Value = 0;
+    //    while (true)
+    //    {
+    //        if (IsHost) tiempo.Value++;
+    //            tiempoTexto.text = tiempo.Value.ToString();
+    //              yield return new WaitForSecondsRealtime(1);
                     
-        }                       
-    }
+    //    }                       
+    //}
   
 
 }

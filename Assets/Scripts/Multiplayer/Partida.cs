@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Unity.Netcode;
 using System.Linq;
+using TMPro;
 /// <summary>
 /// Se encarga de establecer la coneecion al entrar a la escena
 /// </summary>
@@ -17,6 +19,7 @@ public partial class Partida : NetworkBehaviour
         if (!IsOwner) return;
         if(IsHost)
         StartCoroutine(EsperarPorLosDemas());
+
     }
 }
 /// <summary>
@@ -32,8 +35,8 @@ public partial class Partida : NetworkBehaviour
         Debug.Log("6 clientes conectados, comenzando partida");
         haComenzadoLaPartida = true;
         GenerarEsferasAurales();
-        PosicionarJugadoresClientRpc();
-        
+        PosicionarJugadores();
+        StartCoroutine(GameFlow());
         yield break;
     }
     //instanciar 6 esferas aurales, a cada una a�adir la clase seleccionada del game manager
@@ -48,13 +51,95 @@ public partial class Partida : NetworkBehaviour
             esferasEnEscena.Add(obj);
         }
     }
-    [ClientRpc]
-    public void PosicionarJugadoresClientRpc()
+    public void PosicionarJugadores()
     {
         UISystem.uISystem.ShowMessajeUI("Comienza el juego!");
         var q = GameObject.FindObjectsOfType<FirstPersonMovement>().ToList();
         q.ForEach(z => Debug.Log(z.tag));
     }
+    
+}
+/// <summary>
+/// flujo de partida
+/// </summary>
+public partial class Partida : NetworkBehaviour
+{
+    NetworkVariable<int> ticketsRed = new NetworkVariable<int>(30, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    NetworkVariable<int> ticketsBlue = new NetworkVariable<int>(30, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public TMP_Text textTicketsBlue,textTicketsRed;
+
+
+    IEnumerator GameFlow()
+    {
+        int blueRondasGanadas=0,RedRondasGanadas = 0;
+        int rondas = 2;
+        
+        while (rondas > 0)
+        {
+            ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
+          yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0||
+          banderasAzulesCapturadas==2|| banderasRojasCapturadas==2);
+            if(ticketsBlue.Value == 0)
+            {
+                RedRondasGanadas++;
+            }
+             else if(ticketsRed.Value == 0)
+             {
+                blueRondasGanadas++;
+             }
+            ticketsBlue.Value = 30;
+           ticketsRed.Value = 30;
+         SwapTeam();
+         rondas--;
+
+        }
+        string teamGanador;
+        if (blueRondasGanadas > RedRondasGanadas) teamGanador = "blue";
+        else if (blueRondasGanadas < RedRondasGanadas) teamGanador = "red";
+        else teamGanador = "empate";
+        UISystem.uISystem.ShowMessajeUI($"juego terminado gana el equipo: {teamGanador}");
+        yield break;
+    }
+            
+            public void SwapTeam()
+            {
+                var teamRed = GameObject.FindGameObjectsWithTag("red").ToList();
+                var teamBlue = GameObject.FindGameObjectsWithTag("blue").ToList();
+
+                teamBlue.ForEach(p => p.transform.tag = "red");
+                teamRed.ForEach(p => p.transform.tag = "blue");
+            }
+
+    [ClientRpc]
+    public void  StartGameNotificationClientRpc()
+    {
+        UISystem.uISystem.ShowMessajeUI(" Start Game!");
+    }
+    [ClientRpc]
+    public void ActualizarMarcadorClientRpc(int blueT,int redT)
+    {
+        textTicketsBlue.text = blueT.ToString();
+        textTicketsRed.text = redT.ToString();
+    }
+    [ServerRpc]
+    public void QuitarTicketServerRpc(string teamAQuitar)
+    {
+        if (teamAQuitar is "blue") ticketsBlue.Value -= 1;
+        else if (teamAQuitar is "red") ticketsRed.Value -= 1;
+        else print("error en quitar tickets");
+    }
+    
+}
+
+/// <summary>
+/// sistema de captura la bandera
+/// </summary>
+
+public partial class Partida : NetworkBehaviour
+{
+    public short banderasAzulesCapturadas = 0, banderasRojasCapturadas=0;
+    //hacer aparecer bnanderas, considerar que al robar una bandera y llevarla a tu base se agregan 
 }
 
 
