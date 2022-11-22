@@ -15,14 +15,5 @@ public class AssignTeam : NetworkBehaviour
     /// <summary>
     /// cambiar el equipo del personaje
     /// </summary>
-    [ClientRpc]
-    public void SwapTeamClientRPC()
-    {
-        var teamRed = GameObject.FindGameObjectsWithTag("red").ToList();
-        var teamBlue = GameObject.FindGameObjectsWithTag("blue").ToList();
 
-
-        teamBlue.ForEach(p => p.transform.tag = "red");
-        teamRed.ForEach(p => p.transform.tag = "blue");
-    }
 }
