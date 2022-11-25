@@ -64,11 +64,11 @@ public class DPS: Personaje
 
     }
 
-    public async override void estadoAletrado()
-    {
-        vida -= 2;
-        await Task.Delay(4000);
-        alterado = false;
+    //public async override void estadoAletrado()
+    //{
+    //    vida -= 2;
+    //    await Task.Delay(4000);
+    //    alterado = false;
     }
 
     #region Reduccion
@@ -87,27 +87,27 @@ public class DPS: Personaje
 
     #endregion
 
-    public override void Pasivas()
-    {
-        if (vida < maxvida / 2)
-        {
-            if (canPasiva == true)
-            {
-                Debug.Log("Pasiva Activada");
-                multiple = true;
-                canPasiva = false;
-            }
+    //public override void Pasivas()
+    //{
+    //    if (vida < maxvida / 2)
+    //    {
+    //        if (canPasiva == true)
+    //        {
+    //            Debug.Log("Pasiva Activada");
+    //            multiple = true;
+    //            canPasiva = false;
+    //        }
 
-        }
-        if (vida >= maxvida / 2)
-        {
-            if (canPasiva == false)
-            {
-                Debug.Log("Pasiva Desactivada");
-                resetDamage = true;
-                canPasiva = true;
-            }
-        }
+    //    }
+    //    if (vida >= maxvida / 2)
+    //    {
+    //        if (canPasiva == false)
+    //        {
+    //            Debug.Log("Pasiva Desactivada");
+    //            resetDamage = true;
+    //            canPasiva = true;
+    //        }
+    //    }
 
-    }
-}
+    //}
+

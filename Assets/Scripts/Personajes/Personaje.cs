@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 /// <summary>
 /// clase que contiene la base para crear las clases del personaje
@@ -74,6 +75,7 @@ public abstract class Personaje : MonoBehaviour
 
     }
 
+    [ServerRpc]
     public void TakeDamage(float damage)
     {
         damageRecibe = damage;

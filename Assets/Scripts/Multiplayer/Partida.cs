@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using Unity.Collections;
 using System.Linq;
 using TMPro;
 /// <summary>
@@ -77,6 +78,7 @@ public partial class Partida : NetworkBehaviour
         
         while (rondas > 0)
         {
+            InstaciarBanderas();
             ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
           yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0||
           banderasAzulesCapturadas==2|| banderasRojasCapturadas==2);
@@ -114,7 +116,7 @@ public partial class Partida : NetworkBehaviour
     [ClientRpc]
     public void  StartGameNotificationClientRpc()
     {
-        UISystem.uISystem.ShowMessajeUI(" Start Game!");
+        UISystem.uISystem.ShowMessajeUI("Start Game!");
     }
     [ClientRpc]
     public void ActualizarMarcadorClientRpc(int blueT,int redT)
@@ -123,13 +125,30 @@ public partial class Partida : NetworkBehaviour
         textTicketsRed.text = redT.ToString();
     }
     [ServerRpc]
-    public void QuitarTicketServerRpc(string teamAQuitar)
+    public void QuitarTicketServerRpc(FixedString128Bytes teamAQuitar)
     {
-        if (teamAQuitar is "blue") ticketsBlue.Value -= 1;
-        else if (teamAQuitar is "red") ticketsRed.Value -= 1;
+        if (teamAQuitar.ToString() is "blue") ticketsBlue.Value -= 1;
+        else if (teamAQuitar.ToString() is "red") ticketsRed.Value -= 1;
         else print("error en quitar tickets");
     }
-    
+    [ServerRpc]
+    protected void InstaciarBanderas()
+    {
+        //limpiar escena
+        var banderas = GameObject.FindObjectsOfType<Bandera>().ToList();
+        banderas.ForEach(b => b.GetComponent<NetworkObject>().Despawn());
+        banderas.ForEach(b => Destroy(b));
+
+        // instanciar banderas
+        Vector3 posBanderaRed = new Vector3(), posBanderablue =  new Vector3();
+        var banderaRed = Instantiate(prefabBandera, posBanderaRed, Quaternion.identity);
+        var banderablue = Instantiate(prefabBandera, posBanderablue, Quaternion.identity);
+
+        banderaRed.GetComponent<NetworkObject>().Spawn();
+        banderablue.GetComponent<NetworkObject>().Spawn();
+
+    }
+    public GameObject prefabBandera;
 }
 
 /// <summary>
