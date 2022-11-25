@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 public class tank_animation : NetworkBehaviour
 {
+    //Animator
     public Animator animator;
     public void Start() => animator = GetComponent<Animator>();
     
