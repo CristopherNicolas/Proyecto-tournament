@@ -10,7 +10,8 @@ public abstract class Personaje : MonoBehaviour
     Shooting shooting;
 
     public string nombrePersonaje;
-    public float vida = 100, maxvida = 100,  energia = 100;
+    public float vida = 100, maxvida = 100;
+    public float cooldown1 = 5, cooldown2 = 10, ultiCharge, cooldownForCharge1 = 5, cooldownForCharge2 = 10;
     public int Move;
     public int damage = 20;
     public float damageRecibe;
@@ -18,7 +19,7 @@ public abstract class Personaje : MonoBehaviour
     public float h1c = 3, h2c = 7, h3c = 16;
     public float tiempoInvulnerabilidad = 5;
 
-    public bool canPasiva = true, multiple = false, resetDamage = false;
+    public bool canPasiva = true, multiple = false, resetDamage = false, alterado = false;
 
     public virtual void CambiarCooldowns(float _h1c, float _h2c, float _h3c)
     {
@@ -26,16 +27,14 @@ public abstract class Personaje : MonoBehaviour
     }
     public virtual void habilidad1()
     {
-        energia -= 10;
+       
     }
     public virtual void habilidad2()
     {
-        energia -= 20;
 
     }
     public virtual void habilidad3()
     {
-        energia -= 30;
 
     }
     private void Update()
@@ -43,95 +42,48 @@ public abstract class Personaje : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             habilidad1();
+
         }
-          else if(Input.GetKeyDown(KeyCode.E))
+
+        else if(Input.GetKeyDown(KeyCode.E))
          {
           habilidad2();
          }
+         
         else if(Input.GetKeyDown(KeyCode.Q))
         {
             habilidad3();
+            ultiCharge = 0;
         }
 
+        Pasivas();
+        startCooldown();
 
-        PasivaSupport();
-
-        PasivaDPS();
-
-        PasivaTank();
       
     }
 
-    #region Pasiva
 
-    #region DPS_Pasiva
-    public virtual void PasivaDPS()
+    public virtual void Pasivas()
     {
-        if (vida < maxvida/2)
-        {
-            if (canPasiva == true)
-            {
-                Debug.Log("halflife2");
-                multiple = true;
-                canPasiva = false;
-            }
-            
-        }
-        if (vida >= maxvida/2) 
-        {
-            if (canPasiva == false)
-            {
-                Debug.Log("halflife3 confirm");
-                resetDamage = true;
-                canPasiva = true;
-            }
-        }
-    }
-    #endregion
 
-    #region TankPasiva
-    public virtual void PasivaTank()
-    {
-        if (vida < maxvida/4)
-        {
-            Debug.Log("Daño recibido dividido en 2");
-            damageRecibe = (damageRecibe / 2);
-        }
-    }
-    #endregion
 
-    #region SupportPasiva
-    public virtual void PasivaSupport()
-    {
-        if (vida < maxvida / 2)
-        {
-            if (canPasiva == true)
-            {
-                StartCoroutine(autoheal());
-                canPasiva = false;
-            }
-        }
     }
-    IEnumerator autoheal()
-    {
-        Debug.Log("I heal 1 every 5 seconds [Auto]");
-        vida += 1;
-        yield return new WaitForSecondsRealtime(5);
-        canPasiva = true;
-    }
-    #endregion
 
-    #endregion
+    public virtual void startCooldown()
+    {
+
+    }
 
     public void TakeDamage(float damage)
     {
         damageRecibe = damage;
 
         vida -= damageRecibe;
+        ultiCharge += 1.5F;
+        //Debug.Log("" + damageRecibe);
         if (vida <= 0)
         {
             Debug.Log("Player Die");
-            Partida.instance.QuitarTicketServerRpc(gameObject.CompareTag("blue") ? "blue":"red");
         }
     }
 
@@ -144,4 +96,6 @@ public abstract class Personaje : MonoBehaviour
             Debug.Log("Player is fully heal");
         }
     }
+
+    
 }

@@ -31,12 +31,26 @@ public class soporte : Personaje
         UltimateSoporte areaUlti = ulti.GetComponent<UltimateSoporte>();
 
     }
-    public override void PasivaSupport()
+    public override void Pasivas()
     {
-       base.PasivaSupport();
-      
+        if (vida < maxvida / 2)
+        {
+            if (canPasiva == true)
+            {
+                StartCoroutine(autoheal());
+                canPasiva = false;
+            }
+        }
+
     }
-    
+
+    IEnumerator autoheal()
+    {
+        Debug.Log("I heal 1 every 5 seconds [Auto]");
+        vida += 1;
+        yield return new WaitForSecondsRealtime(5);
+        canPasiva = true;
+    }
 
 
     //public void Update()
