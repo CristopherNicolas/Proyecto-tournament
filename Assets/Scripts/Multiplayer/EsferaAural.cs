@@ -20,8 +20,10 @@ public class EsferaAural : NetworkBehaviour
         }
 
     }
+    
     [ServerRpc] void DestroyServerRPC()
     {
+        
         GetComponent<NetworkObject>().Despawn();
         Destroy(gameObject);
     }

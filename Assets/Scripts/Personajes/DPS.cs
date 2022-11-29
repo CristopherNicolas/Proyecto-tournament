@@ -4,14 +4,14 @@ using UnityEngine;
 using System.Threading.Tasks;
 using System.Linq;
 
-public class DPS: Personaje
+public class DPS : Personaje
 {
     public Shooting shooting;
     public GameObject Player, skillPoint, knife;
     public bool canUlti = false;
     Personaje personajeVida;
     move_noNetwork _spdMove;
-  
+
 
     public override void habilidad1()
     {
@@ -69,7 +69,10 @@ public class DPS: Personaje
     //    vida -= 2;
     //    await Task.Delay(4000);
     //    alterado = false;
-    }
+    //Updated upstream
+
+    //}
+}
 
     #region Reduccion
     //IEnumerator damageReduction()

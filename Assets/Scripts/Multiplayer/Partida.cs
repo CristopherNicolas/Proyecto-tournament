@@ -36,7 +36,7 @@ public partial class Partida : NetworkBehaviour
         Debug.Log("6 clientes conectados, comenzando partida");
         haComenzadoLaPartida = true;
         GenerarEsferasAurales();
-        PosicionarJugadores();
+        PosicionarJugadorClientRpc();
         StartCoroutine(GameFlow());
         yield break;
     }
@@ -52,11 +52,23 @@ public partial class Partida : NetworkBehaviour
             esferasEnEscena.Add(obj);
         }
     }
-    public void PosicionarJugadores()
+    [ClientRpc]
+    public void PosicionarJugadorClientRpc()
     {
-        UISystem.uISystem.ShowMessajeUI("Comienza el juego!");
+        UISystem.uISystem.ShowMessajeUIClientRpc ("Comienza el juego!");
         var q = GameObject.FindObjectsOfType<FirstPersonMovement>().ToList();
-        q.ForEach(z => Debug.Log(z.tag));
+       var player = q.Where(o => o.GetComponent<NetworkObject>().IsOwner);
+        if(IsHost||IsServer)
+        {
+
+            player.Where(o => o.IsOwnedByServer).First().transform.position =  tag  is "red" ?
+            posicionesTeamRed[Random.Range(0, posicionesTeamRed.Count)].transform.position
+            : posicionesTeamBlue[Random.Range(0, posicionesTeamBlue.Count)].transform.position;
+            return;
+        }
+        player.First().transform.position = player.First().tag is "red" ? 
+            posicionesTeamRed[Random.Range(0, posicionesTeamRed.Count)].transform.position
+            : posicionesTeamBlue[Random.Range(0, posicionesTeamBlue.Count)].transform.position;
     }
     
 }
@@ -78,7 +90,7 @@ public partial class Partida : NetworkBehaviour
         
         while (rondas > 0)
         {
-            InstaciarBanderas();
+            //InstaciarBanderasServerRpc();
             ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
           yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0||
           banderasAzulesCapturadas==2|| banderasRojasCapturadas==2);
@@ -132,7 +144,7 @@ public partial class Partida : NetworkBehaviour
         else print("error en quitar tickets");
     }
     [ServerRpc]
-    protected void InstaciarBanderas()
+    protected void InstaciarBanderasServerRpc()
     {
         //limpiar escena
         var banderas = GameObject.FindObjectsOfType<Bandera>().ToList();

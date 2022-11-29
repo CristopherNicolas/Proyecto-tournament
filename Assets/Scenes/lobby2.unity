@@ -279,6 +279,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7072883816568093794, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 276.1295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883816568093794, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 429.094
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883816568093794, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6804
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883816568093794, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150.25409
+      objectReference: {fileID: 0}
     - target: {fileID: 7072883816568093795, guid: 5d6a7500484734f458e2028c271bdead,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -399,6 +419,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7072883817468105037, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 34.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883817468105037, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 34.98
+      objectReference: {fileID: 0}
     - target: {fileID: 7072883817507837488, guid: 5d6a7500484734f458e2028c271bdead,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -409,6 +439,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CambiarPersonajeAElegir
       objectReference: {fileID: 0}
+    - target: {fileID: 7072883817507837503, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 255.0932
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883817507837503, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 429.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883817507837503, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -342.2233
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883817507837503, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7072883818511601158, guid: 5d6a7500484734f458e2028c271bdead,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -418,6 +468,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: AceptarPersonaje
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883818520581469, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 243.8884
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883818520581469, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 429.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883818520581469, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 348.98303
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072883818520581469, guid: 5d6a7500484734f458e2028c271bdead,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150.25
       objectReference: {fileID: 0}
     - target: {fileID: 7072883818520581470, guid: 5d6a7500484734f458e2028c271bdead,
         type: 3}
@@ -943,6 +1013,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5057964307138977768, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[1].Override
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5057964307138977769, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
         type: 3}
       propertyPath: m_RootOrder
