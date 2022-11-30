@@ -1015,8 +1015,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5057964307138977768, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
         type: 3}
-      propertyPath: NetworkConfig.NetworkPrefabs.Array.data[1].Override
-      value: 0
+      propertyPath: LogLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5057964307138977768, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
+        type: 3}
+      propertyPath: NetworkConfig.PlayerPrefab
+      value: 
+      objectReference: {fileID: 8660738697118820855, guid: 8d1240cfdd8e49443a2e372dbd96ff58,
+        type: 3}
+    - target: {fileID: 5057964307138977768, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
+        type: 3}
+      propertyPath: NetworkConfig.NetworkPrefabs.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5057964307138977769, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
         type: 3}
@@ -1077,11 +1088,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NetworkManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5057964307138977771, guid: a7aedf1c7bff9f841a8b340e007b3ab0,
-        type: 3}
-      propertyPath: m_ProtocolType
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7aedf1c7bff9f841a8b340e007b3ab0, type: 3}

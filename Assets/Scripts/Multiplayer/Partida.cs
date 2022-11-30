@@ -13,6 +13,7 @@ public partial class Partida : NetworkBehaviour
 {
     public bool haComenzadoLaPartida = false;
     public static Partida instance;
+
     private void Start()
     {
         if (GameManager.instance.estaSiendoServer) NetworkManager.Singleton.StartHost();
@@ -32,7 +33,7 @@ public partial class Partida : NetworkBehaviour
     public GameObject prefabEsferaAural;
     IEnumerator EsperarPorLosDemas()
     {
-        while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) yield return new WaitForEndOfFrame();
+        while (NetworkManager.Singleton.ConnectedClientsList.Count < 6) yield return new WaitForEndOfFrame();
         Debug.Log("6 clientes conectados, comenzando partida");
         haComenzadoLaPartida = true;
         GenerarEsferasAurales();
@@ -47,7 +48,15 @@ public partial class Partida : NetworkBehaviour
         foreach (var item in posiciones)
         {
             var obj = Instantiate(prefabEsferaAural, item.transform);
-            obj.GetComponent<EsferaAural>().personajeEsfera = GameManager.instance.personajeSeleccionadoEnLobby;
+            //aqui hay que añadir el personaje de cada gamemanager de cada cliente
+            //obj.GetComponent<EsferaAural>().personajeEsfera = GameManager.instance.personajeSeleccionadoEnLobby;
+            //solucin random
+            int r = Random.Range(0, 2);
+            if(r==0)obj.GetComponent<EsferaAural>().personajeEsfera = obj.GetComponent<EsferaAural>().tanque.GetComponent<Personaje>();
+            else if(r==1) obj.GetComponent<EsferaAural>().personajeEsfera = obj.GetComponent<EsferaAural>().soporte.GetComponent<Personaje>();
+            else if(r==2) obj.GetComponent<EsferaAural>().personajeEsfera = obj.GetComponent<EsferaAural>().dps.GetComponent<Personaje>(); ;
+
+
             obj.GetComponent<NetworkObject>().Spawn();
             esferasEnEscena.Add(obj);
         }

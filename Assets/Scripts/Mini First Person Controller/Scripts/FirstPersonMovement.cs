@@ -18,6 +18,14 @@ public class FirstPersonMovement : NetworkBehaviour
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>
     public List<System.Func<float>> speedOverrides = new List<System.Func<float>>();
 
+    private void Start()
+    {
+        if (!IsOwner)
+        {
+            transform.GetChild(0).GetComponent<Camera>().enabled = false;
+            enabled = false;
+        }
+    }
     void Awake()
     {
         // Get the rigidbody on this.
@@ -39,9 +47,7 @@ public class FirstPersonMovement : NetworkBehaviour
     {
         if (!IsOwner)
         {
-            transform.GetChild(0).GetComponent<Camera>().enabled = false;
-            enabled = false;
-        return;
+           return;
         }
         // Update IsRunning from input.
         IsRunning = canRun && Input.GetKey(runningKey);

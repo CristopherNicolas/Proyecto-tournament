@@ -5823,6 +5823,7 @@ MonoBehaviour:
   fireRate: 0.25
   hitForce: 100
   damage: 10
+  damageOriginal: 10
   maxAmmo: 10
   currentAmmo: 10
   realoadTime: 1
@@ -10733,6 +10734,7 @@ MonoBehaviour:
   fireRate: 0.1
   hitForce: 120
   damage: 5
+  damageOriginal: 10
   maxAmmo: 50
   currentAmmo: 50
   realoadTime: 1

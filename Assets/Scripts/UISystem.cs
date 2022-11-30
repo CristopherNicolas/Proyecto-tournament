@@ -11,6 +11,7 @@ public class UISystem : MonoBehaviour
 {
     public static UISystem uISystem;
     public TMP_Text feed;
+    public Image teamDistintive;
     
 
     private void Awake()

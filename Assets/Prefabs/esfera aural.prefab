@@ -112,6 +112,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   personajeEsfera: {fileID: 0}
+  tanque: {fileID: 8660738697118820855, guid: 18890f79fe8b4a647a933d0533ac7bf4, type: 3}
+  dps: {fileID: 8660738697118820855, guid: 726219d3b90deee4aae23faca09a0c13, type: 3}
+  soporte: {fileID: 8660738697118820855, guid: 2be9ffc1ab4955c48b3f6223d0de5cfe, type: 3}
+  colision: {fileID: 0}
 --- !u!114 &1712271781363736946
 MonoBehaviour:
   m_ObjectHideFlags: 0
