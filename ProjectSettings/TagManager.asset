@@ -10,6 +10,8 @@ TagManager:
   - red
   - blueShield
   - redShield
+  - baseBlue
+  - baseRed
   layers:
   - Default
   - TransparentFX

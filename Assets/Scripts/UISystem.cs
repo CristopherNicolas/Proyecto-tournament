@@ -10,7 +10,7 @@ using Unity.Netcode;
 public class UISystem : MonoBehaviour
 {
     public static UISystem uISystem;
-    public TMP_Text feed;
+    public TMP_Text feed,banderasRedText,banderasBlueText;
     public Image teamDistintive;
     
 
@@ -21,6 +21,12 @@ public class UISystem : MonoBehaviour
             uISystem = this;
         }
     }
+    IEnumerator BorrarTexto(float tiempo)
+    {
+        yield return new WaitForSecondsRealtime(tiempo);
+        feed.text = "";
+        yield break;
+    }
     private IEnumerator Start()
     {
         yield return new WaitForSecondsRealtime(3);
@@ -30,10 +36,18 @@ public class UISystem : MonoBehaviour
     public void ShowMessajeUI(string text)
     {
         feed.text = text;
+        StartCoroutine(BorrarTexto(3));
     }
     [ClientRpc] 
     public void ShowMessajeUIClientRpc(FixedString128Bytes text)
     {
         feed.text = text.ConvertToString();
+        StartCoroutine(BorrarTexto(3));
+    }
+    [ClientRpc]
+    public void UpdateBanderas(int redFlags,int blueFlags)
+    {
+        banderasBlueText.text =  blueFlags.ToString();
+        banderasRedText.text = redFlags.ToString();
     }
 }

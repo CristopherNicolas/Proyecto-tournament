@@ -21,7 +21,7 @@ public class EsferaAural : NetworkBehaviour
                 //destruir al collider para
                 colision = other.gameObject;
                 DestroyPlayerServerRpc();
-                InstantiatePersonajeServerRpc(i,other.GetComponent<NetworkObject>().OwnerClientId);
+                InstantiatePersonajeServerRpc(i,other.GetComponent<NetworkObject>().OwnerClientId, other.CompareTag("red"));
                 DestroyServerRPC();
             }
         }
@@ -31,7 +31,7 @@ public class EsferaAural : NetworkBehaviour
         colision.GetComponent<NetworkObject>().Despawn();
         Destroy(colision);
     }
-    [ServerRpc]void InstantiatePersonajeServerRpc(int i,ulong ownerId)
+    [ServerRpc]void InstantiatePersonajeServerRpc(int i,ulong ownerId,bool isRedTeam)
     {
         GameObject tmp;
         switch (i)
@@ -42,6 +42,7 @@ public class EsferaAural : NetworkBehaviour
             default: print("error en InstantiatePersonaje"); return;
         }
         tmp.GetComponent<NetworkObject>().SpawnWithOwnership(ownerId);
+        tmp.transform.tag = isRedTeam ? "red" : "blue";
     }
     [ServerRpc] void DestroyServerRPC()
     {
