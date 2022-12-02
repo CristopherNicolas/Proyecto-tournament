@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 public class Shooting : MonoBehaviour
 {
@@ -27,7 +28,14 @@ public class Shooting : MonoBehaviour
     public LayerMask shieldRed;
     public LayerMask shieldBlue;
 
-
+    [ServerRpc]
+    public GameObject InstanciarVFXServerRpc(Vector3 POINT)
+    {
+        //instancias
+        var obj = Instantiate(impactoEfecto,POINT,Quaternion.identity);
+        obj.GetComponent<NetworkObject>().Spawn();
+        return obj;
+    }
     //[SerializeField] private AudioSource gunAudio; //(Necesita audioSource)
 
     // Start is called before the first frame update
@@ -86,6 +94,7 @@ public class Shooting : MonoBehaviour
     {
         damage = damage * 2;
     }
+
     public void resetdamage()
     {
         damage = damageOriginal;
@@ -112,8 +121,9 @@ public class Shooting : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
-                    Destroy(impactoeffectGo, 2f);
+                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                   // GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
+                    Destroy(impactoeffectGo2, 2f);
 
                     #region Player VS Practice target
                     if (hit.collider.gameObject.tag == "target") //tag especificando el objeto que se le disparo
@@ -176,8 +186,9 @@ public class Shooting : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
-                    Destroy(impactoeffectGo, 2f);
+                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                    //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
+                    Destroy(impactoeffectGo2, 2f);
 
                     #region Player VS Practice target
                     if (hit.collider.gameObject.tag == "target") //tag especificando el objeto que se le disparo

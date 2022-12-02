@@ -16,9 +16,6 @@ public class Tanque : Personaje
     public override void habilidad1()
     {
         base.habilidad1();
-        cooldownForCharge1 = 0;
-
-
         if (canShield == true)
         {
             canShield = false;
@@ -30,8 +27,6 @@ public class Tanque : Personaje
     public override void habilidad2()
     {
         base.habilidad2();
-        cooldownForCharge2 = 0;
-
         /* GameObject bomb = Instantiate(granade, shieldPoint.transform.position, Quaternion.identity) as GameObject;
          rbGranade.AddForce(transform.forward * 20, ForceMode.Impulse);
          granada.arrojarGranada();*/

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Netcode;
 using UnityEngine;
 /// <summary>
@@ -12,15 +13,15 @@ public abstract class Personaje : MonoBehaviour
 
     public string nombrePersonaje;
     public float vida = 100, maxvida = 100;
-    public float cooldown1 = 5, cooldown2 = 10, ultiCharge, cooldownForCharge1 = 5, cooldownForCharge2 = 10;
+    public float ultiCharge;
     public int Move;
-    public int damage = 20;
+    public int damage = 20,cooldown1, cooldown2;
     public float damageRecibe;
     public int speed = 8;
     public float h1c = 3, h2c = 7, h3c = 16;
     public float tiempoInvulnerabilidad = 5;
 
-    public bool canPasiva = true, multiple = false, resetDamage = false, alterado = false;
+    public bool canPasiva = true, multiple = false, resetDamage = false, alterado = false, skill1 = true, skill2 = true;
 
     public virtual void CambiarCooldowns(float _h1c, float _h2c, float _h3c)
     {
@@ -40,18 +41,19 @@ public abstract class Personaje : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && skill1)
         {
             habilidad1();
-
+            skill1 = false;
         }
 
-        else if(Input.GetKeyDown(KeyCode.E))
-         {
-          habilidad2();
-         }
-         
-        else if(Input.GetKeyDown(KeyCode.Q))
+        else if(Input.GetKeyDown(KeyCode.E) && skill2)
+        {
+            habilidad2();
+            skill2 = false;
+        }
+
+        else if(Input.GetKeyDown(KeyCode.Q) && ultiCharge >= 100)
         {
             habilidad3();
             ultiCharge = 0;
@@ -70,8 +72,25 @@ public abstract class Personaje : MonoBehaviour
 
     }
 
-    public virtual void startCooldown()
+    public async void startCooldown()
     {
+
+        if(!skill1)
+        {
+            Debug.Log("Recargando habilidad 1");
+            await Task.Delay(cooldown1);
+            skill1 = true;
+            Debug.Log("Habilidad 1 lista");
+
+        }
+
+        if(!skill2)
+        {
+            Debug.Log("Recargando habilidad 2");
+            await Task.Delay(cooldown2);
+            skill2 = true;
+            Debug.Log("Habilidad 2 lista");
+        }
 
     }
 
