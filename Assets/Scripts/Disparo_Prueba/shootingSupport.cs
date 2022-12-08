@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class shootingSupport : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class shootingSupport : MonoBehaviour
 
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject impactoEfecto; //efecto de bala de impacto en superficie [Prefab]
-    [SerializeField] public ParticleSystem muzzleFlash; //efecto de balas al disparar
+    [SerializeField] public VisualEffect muzzleFlash; //efecto de balas al disparar
     [SerializeField] public Camera fpscam; //Camara de donde nace el raycast
     public Transform gunEnd; //Empty de punta de arma
 
