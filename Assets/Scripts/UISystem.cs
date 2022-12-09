@@ -12,7 +12,6 @@ public class UISystem : MonoBehaviour
     public static UISystem uISystem;
     public TMP_Text feed,banderasRedText,banderasBlueText;
     public Image teamDistintive;
-    
 
     private void Awake()
     {
@@ -45,9 +44,16 @@ public class UISystem : MonoBehaviour
         StartCoroutine(BorrarTexto(3));
     }
     [ClientRpc]
-    public void UpdateBanderas(int redFlags,int blueFlags)
+    public void UpdateBanderasClientRpc(int redFlags,int blueFlags)
     {
-        banderasBlueText.text =  blueFlags.ToString();
-        banderasRedText.text = redFlags.ToString();
+        GameObject.Find("tba").GetComponent<TMP_Text>().text=  blueFlags.ToString();
+        GameObject.Find("tbr").GetComponent<TMP_Text>().text = redFlags.ToString();
+    }
+    [ClientRpc]public void ResetUIClientRpc()
+    {
+        banderasBlueText.text = "0";
+        banderasRedText.text = "0";
+        Partida.instance.textTicketsBlue.text = "30";
+        Partida.instance.textTicketsRed.text = "30";
     }
 }

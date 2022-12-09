@@ -11722,7 +11722,7 @@ MonoBehaviour:
   player: {fileID: 8660738697118820855}
   impactoEfecto: {fileID: 4492852424436026809, guid: 1517cfdd2e0f5f24e8bbbe4202bfef39,
     type: 3}
-  muzzleFlash: {fileID: 0}
+  muzzleFlash: {fileID: 6454235788791151250}
   fpscam: {fileID: 8682879786320010477}
   gunEnd: {fileID: 5799262136475429111}
   shieldRed:

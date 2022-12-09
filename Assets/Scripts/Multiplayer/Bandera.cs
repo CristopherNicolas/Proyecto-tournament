@@ -22,6 +22,11 @@ public class Bandera : NetworkBehaviour
             CapturarBanderaServerRpc(true);
         else if (otherC.CompareTag("baseBlue") && colorBandera is "red")
             CapturarBanderaServerRpc(false);
+        int rojas = Partida.instance.banderasRojasCapturadas.Value, azules = Partida.instance.banderasAzulesCapturadas.Value;
+        UISystem.uISystem.UpdateBanderasClientRpc(rojas, azules);
+        Debug.Log($"azules: {Partida.instance.banderasAzulesCapturadas.Value} , rojas: {Partida.instance.banderasRojasCapturadas.Value}");
+
+
     }
     [ServerRpc] void AtraparBanderaServerRpc()
     {
@@ -50,6 +55,7 @@ public class Bandera : NetworkBehaviour
             UISystem.uISystem.ShowMessajeUIClientRpc("bandera roja recuperada");
         }
     }
+    
     [ServerRpc]
     void CapturarBanderaServerRpc(bool isRedFlag)
     {
@@ -59,7 +65,6 @@ public class Bandera : NetworkBehaviour
         if (isRedFlag) Partida.instance.banderasRojasCapturadas.Value+=1;
         else Partida.instance.banderasAzulesCapturadas.Value+=1;
         estaFueraDeBase = false;
-        UISystem.uISystem.UpdateBanderas(Partida.instance.banderasRojasCapturadas.Value, Partida.instance.banderasAzulesCapturadas.Value);
             
     }
 }

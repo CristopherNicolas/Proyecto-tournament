@@ -65,7 +65,6 @@ public partial class Partida : NetworkBehaviour
     [ClientRpc]
     public void PosicionarJugadorClientRpc()
     {
-        UISystem.uISystem.ShowMessajeUIClientRpc ("Comienza el juego!");
         var q = GameObject.FindObjectsOfType<FirstPersonMovement>().ToList();
        var player = q.Where(o => o.GetComponent<NetworkObject>().IsOwner);
         if(IsHost||IsServer)
@@ -97,23 +96,24 @@ public partial class Partida : NetworkBehaviour
     {
         int blueRondasGanadas=0,RedRondasGanadas = 0;
         int rondas = 2;
+        UISystem.uISystem.ShowMessajeUIClientRpc ("Comienza el juego!");
         while (rondas > 0)
         {
-           //InstaciarBanderasServerRpc();
             ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
              yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0||
               banderasAzulesCapturadas.Value==2|| banderasRojasCapturadas.Value==2);
-               if(ticketsBlue.Value == 0)
-               {
+               if(ticketsBlue.Value == 0||banderasAzulesCapturadas.Value ==2)
                  RedRondasGanadas++;
-               }
-               else if(ticketsRed.Value == 0)
-               {
+                    else if(ticketsRed.Value == 0||banderasRojasCapturadas.Value ==2)
                  blueRondasGanadas++;
-               }
+               banderasAzulesCapturadas.Value = 0;
+              banderasRojasCapturadas.Value = 0;
             ticketsBlue.Value = 30;
            ticketsRed.Value = 30;
+           UISystem.uISystem.ShowMessajeUIClientRpc("Ronda terminada, cambiando equipo");
          SwapTeam();
+            ChangeDistintiveClientRpc();
+         PosicionarJugadorClientRpc();
          rondas--;
         }
         string teamGanador;
@@ -130,6 +130,13 @@ public partial class Partida : NetworkBehaviour
                 teamBlue.ForEach(p => p.transform.tag = "red");
                 teamRed.ForEach(p => p.transform.tag = "blue");
             }
+    [ClientRpc] void ChangeDistintiveClientRpc()
+    {
+        var player = GameObject.FindObjectsOfType<FirstPersonMovement>().
+            Where(p => p.GetComponent<NetworkObject>().OwnerClientId == NetworkManager.Singleton.LocalClientId).First();
+        GameObject.Find("team distintive (ui manager)").GetComponent<Image>().color
+            = player.CompareTag("red") ? Color.red : Color.blue;
+    }
 
     [ClientRpc]
     public void  StartGameNotificationClientRpc()
