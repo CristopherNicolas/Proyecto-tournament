@@ -2649,7 +2649,7 @@ GameObject:
   - component: {fileID: 1129541251}
   - component: {fileID: 1129541253}
   m_Layer: 0
-  m_Name: Audio saystem
+  m_Name: Audio system
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2670,7 +2670,7 @@ MonoBehaviour:
   audiosSoporte: []
   audiosTanke: []
   audiosGeneral: []
-  audioSourceGlobal: {fileID: 0}
+  audioSourceGlobal: {fileID: 1129541253}
   audioSourcePlayer: {fileID: 0}
 --- !u!4 &1129541252
 Transform:
