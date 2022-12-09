@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using Unity.Netcode;
 public class AudioSystem: MonoBehaviour
 {
     public static AudioSystem instance;
@@ -28,6 +30,10 @@ public class AudioSystem: MonoBehaviour
 /// <param name="source"></param>
     public void PonerSonidoConLoop(AudioClip clip,AudioSource source)
     {
+        if(audioSourcePlayer is null)
+        audioSourcePlayer = GameObject.FindObjectsOfType<FirstPersonMovement>()
+        .Where(s => s.GetComponent<NetworkObject>().IsOwner).First().GetComponent<AudioSource>();
+            
         source.Stop();
         source.loop = true;
         source.clip = clip;
