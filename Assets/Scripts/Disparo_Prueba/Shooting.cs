@@ -186,6 +186,7 @@ public class Shooting : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
+                    Debug.Log(hit.transform.name);
                     GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);

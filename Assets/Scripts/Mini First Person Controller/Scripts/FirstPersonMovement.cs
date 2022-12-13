@@ -7,6 +7,8 @@ using System.Linq;
 public class FirstPersonMovement : NetworkBehaviour
 {
     public float speed = 5;
+    public  NetworkVariable <float> hp = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);
+    public  NetworkVariable <float> municion = new NetworkVariable<float>(25, NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);
 
     [Header("Running")]
     public bool canRun = true;
@@ -26,6 +28,7 @@ public class FirstPersonMovement : NetworkBehaviour
             enabled = false;
         }
     }
+
     void Awake()
     {
         // Get the rigidbody on this.
@@ -35,7 +38,7 @@ public class FirstPersonMovement : NetworkBehaviour
     {
         if (IsHost || IsServer)
             StartCoroutine(DestroyListeners());
-
+        AudioSystem.instance.audioSourcePlayer = GetComponent<AudioSource>();
         base.OnNetworkSpawn();
     }
     IEnumerator DestroyListeners()

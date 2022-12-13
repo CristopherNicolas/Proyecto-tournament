@@ -6,34 +6,18 @@ public class Pocion : Item
 {
     public float cantidadDeVida = 25;
     public Personaje personaje;
-    public GameObject potion;
-
-    public void Start()
-    {
-        consumibleObject = potion;
-    }
     public override void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && personaje.vida < 100)
+        if(GetComponent<FirstPersonMovement>() && GetComponent<Personaje>())
         {
-            personaje.vida += transform.localScale.x * cantidadDeVida;
-            StartCoroutine(pocionRespawn());
-            
-
-
+            personaje = GetComponent<Personaje>();
+            personaje.vida +=  cantidadDeVida;
             if (personaje.vida > 100)
             {
                 personaje.vida = 100;
             }    
         }
-
-        IEnumerator pocionRespawn()
-        {
-            potion.SetActive(false);
-            yield return new WaitForSeconds(5);
-            potion.SetActive(true);
-
-            yield break;
-        }
+       base.OnTriggerEnter(other);
     }
+    
 }

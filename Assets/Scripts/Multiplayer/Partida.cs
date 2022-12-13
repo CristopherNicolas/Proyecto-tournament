@@ -99,6 +99,7 @@ public partial class Partida : NetworkBehaviour
         UISystem.uISystem.ShowMessajeUIClientRpc ("Comienza el juego!");
         while (rondas > 0)
         {
+            InstanciarItemServerRpc();
             ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
              yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0||
               banderasAzulesCapturadas.Value==2|| banderasRojasCapturadas.Value==2);
@@ -174,6 +175,18 @@ public partial class Partida : NetworkBehaviour
 
     }
     public GameObject prefabBandera;
+    public Transform[] posicionesItems,items;
+    [ServerRpc]
+    void InstanciarItemServerRpc()
+    {
+        var item = Instantiate(items[0].gameObject, posicionesItems[1].position
+            ,Quaternion.Euler(-90,0,0));
+        item.GetComponent<NetworkObject>().Spawn();
+
+        var itemVelocidad = Instantiate(items[1].gameObject, posicionesItems[0].position
+            , Quaternion.Euler(-90, 0, 0));
+        itemVelocidad.GetComponent<NetworkObject>().Spawn();
+    }
 }
 
 

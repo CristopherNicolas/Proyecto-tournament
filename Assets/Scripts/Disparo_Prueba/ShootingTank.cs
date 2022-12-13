@@ -72,7 +72,7 @@ public class ShootingTank : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time > nextFire && currentAmmo > 0)
         {
             shoot();
-            shootSound();
+            AudioSystem.instance.PonerSonido(AudioSystem.instance.audiosTanke[0], AudioSystem.instance.audioSourcePlayer);
         }
 
 
@@ -234,5 +234,5 @@ public class ShootingTank : MonoBehaviour
         #endregion
     }
 
-    void shootSound() => disparoSound.clip = disparoSoundBank[Random.Range(0, disparoSoundBank.Length)];
+     
 }

@@ -1,30 +1,30 @@
 //using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 /// <summary>
 /// base para crear cualquier item
 /// </summary>
-public abstract class Item : MonoBehaviour
+public abstract class Item : NetworkBehaviour
 {
-    public float tiempoSpawn = 2, tiempoActivo;
-    public GameObject consumibleObject;
-    public virtual void Efecto()
+    [ServerRpc(RequireOwnership = false)] void DestroyServerRpc()
     {
-        consumibleObject.SetActive(false);
+        NetworkObject.Despawn();
+        Destroy(gameObject);
     }
-
-    public virtual void respawn()
-    {
-        consumibleObject.SetActive(true);
-
-    }
-
+ 
     public virtual void OnTriggerEnter(Collider other)
     {
-
+        if (other.GetComponent<FirstPersonMovement>())
+        {
+            DestroyServerRpc();
+        }
 
     }
-
+    private void Update()
+    {
+        transform.Rotate(new Vector3(0, 1*Time.deltaTime, 0));
+    }
 
 
 }

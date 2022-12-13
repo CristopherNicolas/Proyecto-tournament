@@ -6,6 +6,7 @@ public class Bandera : NetworkBehaviour
 {
     public string colorBandera;
     public bool estaFueraDeBase = false;
+    public Transform posBanderaRoja, posBanderaAzul;
     protected Vector3 startPos;
     GameObject other;
     private void Start() => startPos = transform.position;
@@ -55,13 +56,12 @@ public class Bandera : NetworkBehaviour
             UISystem.uISystem.ShowMessajeUIClientRpc("bandera roja recuperada");
         }
     }
-    
     [ServerRpc]
     void CapturarBanderaServerRpc(bool isRedFlag)
     {
         //poner la bandera nuevamente en su posicion inicial
         transform.SetParent(null);
-        transform.position = startPos;
+        transform.position = transform.name == "bandera roja" ? posBanderaRoja.position : posBanderaAzul.position;
         if (isRedFlag) Partida.instance.banderasRojasCapturadas.Value+=1;
         else Partida.instance.banderasAzulesCapturadas.Value+=1;
         estaFueraDeBase = false;

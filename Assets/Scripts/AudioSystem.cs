@@ -21,8 +21,14 @@ public class AudioSystem: MonoBehaviour
     /// </summary>
     /// <param name="clip"></param>
     /// <param name="source"></param>
-    public void PonerSonido(AudioClip clip, AudioSource source) 
-        => source.PlayOneShot(clip);
+    public void PonerSonido(AudioClip clip, AudioSource source)
+    {
+        if (audioSourcePlayer is null)
+            audioSourcePlayer = GameObject.FindObjectsOfType<FirstPersonMovement>()
+            .Where(s => s.GetComponent<NetworkObject>().IsOwner).First().GetComponent<AudioSource>();
+
+        source.PlayOneShot(clip);
+    }
 /// <summary>
 /// pon un sonido que se repite constantemente
 /// </summary>

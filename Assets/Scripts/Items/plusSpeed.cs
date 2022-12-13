@@ -4,31 +4,15 @@ using UnityEngine;
 
 public class plusSpeed : Item
 {
-    public Personaje personaje;
-    public int moreSpeed = 2;
-    public GameObject speed;
-    public void Start()
-    {
-        
-    }
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.GetComponent<FirstPersonMovement>())
         {
-            personaje.speed *= moreSpeed;
-            StartCoroutine(backtoSpeed());
-           
+            var chara = other.GetComponent<FirstPersonMovement>();
+            chara.runSpeed += 2;
+            Debug.Log(chara);
 
         }
-    }
-
-    IEnumerator backtoSpeed()
-    {
-        speed.SetActive(false);
-        yield return new WaitForSeconds(tiempoSpawn);
-        personaje.speed /= moreSpeed;
-        speed.SetActive(true);
-
-        yield break;
+        base.OnTriggerEnter(other);
     }
 }
