@@ -7,14 +7,13 @@ using System.Linq;
 public class FirstPersonMovement : NetworkBehaviour
 {
     public float speed = 5;
-    public  NetworkVariable <float> hp = new NetworkVariable<float>(100, NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);
-    public  NetworkVariable <float> municion = new NetworkVariable<float>(25, NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);
 
     [Header("Running")]
     public bool canRun = true;
     public bool IsRunning { get; private set; }
     public float runSpeed = 9;
     public KeyCode runningKey = KeyCode.LeftShift;
+    public float hp=100; 
 
     Rigidbody rb;
     /// <summary> Functions to override movement speed. Will use the last added override. </summary>

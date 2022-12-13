@@ -28,12 +28,10 @@ public class Shooting : MonoBehaviour
     public LayerMask shieldRed;
     public LayerMask shieldBlue;
 
-    [ServerRpc]
-    public GameObject InstanciarVFXServerRpc(Vector3 POINT)
+    public GameObject InstanciarVFX(Vector3 POINT)
     {
         //instancias
         var obj = Instantiate(impactoEfecto,POINT,Quaternion.identity);
-        obj.GetComponent<NetworkObject>().Spawn();
         return obj;
     }
     //[SerializeField] private AudioSource gunAudio; //(Necesita audioSource)
@@ -121,7 +119,7 @@ public class Shooting : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                    GameObject impactoeffectGo2 = InstanciarVFX(hit.point);
                    // GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 
@@ -187,7 +185,7 @@ public class Shooting : MonoBehaviour
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
                     Debug.Log(hit.transform.name);
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                    GameObject impactoeffectGo2 = InstanciarVFX(hit.point);
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 
@@ -205,7 +203,10 @@ public class Shooting : MonoBehaviour
                     {
                         hit.rigidbody.AddForce(-hit.normal * hitForce); //Empuje a objeto que se le disparo
                         Personaje player = hit.collider.gameObject.GetComponent<Personaje>();
-                        player.TakeDamage(damage);
+                        var fps = hit.collider.GetComponent<FirstPersonMovement>();
+                        if (player is not null)
+                            player.TakeDamage(damage);
+                        else fps.hp -= damage;
 
                         Debug.Log("-BLUE- HIT +RED+");
 
