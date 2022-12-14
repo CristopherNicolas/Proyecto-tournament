@@ -183,7 +183,7 @@ public class LobbyRelay : MonoBehaviour
         UpdateState?.Invoke("Creating a new match...");
 
         // External connections
-        int maxConnections = 1;
+        int maxConnections = 5;
 
         try
         {

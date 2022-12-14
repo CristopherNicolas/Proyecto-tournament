@@ -34,7 +34,7 @@ public partial class Partida : NetworkBehaviour
     public GameObject prefabEsferaAural;
     IEnumerator EsperarPorLosDemas()
     {
-        while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) yield return new WaitForEndOfFrame();
+        while (NetworkManager.Singleton.ConnectedClientsList.Count < 6) yield return new WaitForEndOfFrame();
         Debug.Log("6 clientes conectados, comenzando partida");
         haComenzadoLaPartida = true;
         yield return new WaitForSecondsRealtime(1);

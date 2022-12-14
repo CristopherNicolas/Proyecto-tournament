@@ -8,7 +8,7 @@ public class AssignTeam : NetworkBehaviour
     private void Start()
     {
         //if (!IsOwner) return;
-        gameObject.tag = OwnerClientId > 0 ? "red" : "blue";
+        gameObject.tag = OwnerClientId > 2 ? "red" : "blue";
         Debug.Log($"Tag owner id: {OwnerClientId}, tag ={transform.tag}");
         CambiarColorDistintivoClient();
     }
