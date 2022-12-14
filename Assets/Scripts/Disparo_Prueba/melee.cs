@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.VFX;
 
 public class melee : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class melee : MonoBehaviour
     public LayerMask shieldRed;
     public LayerMask shieldBlue;
 
+    /*[Header("ShootSound")] //falta audio melee
+    public AudioSource disparoSound;
+    public AudioClip[] disparoSoundBank;*/
+
     [ServerRpc]
     public GameObject InstanciarVFXServerRpc(Vector3 POINT)
     {
@@ -22,8 +27,6 @@ public class melee : MonoBehaviour
         obj.GetComponent<NetworkObject>().Spawn();
         return obj;
     }
-
-    //[SerializeField] private AudioSource meleeAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -126,7 +129,7 @@ public class melee : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point); //activar este
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 

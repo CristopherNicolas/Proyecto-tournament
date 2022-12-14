@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.VFX;
 
 public class Shooting : MonoBehaviour
 {
@@ -21,12 +22,16 @@ public class Shooting : MonoBehaviour
 
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject impactoEfecto; //efecto de bala de impacto en superficie [Prefab]
-    [SerializeField] public ParticleSystem muzzleFlash; //efecto de balas al disparar
+    [SerializeField] public VisualEffect muzzleFlash; //efecto de balas al disparar
     [SerializeField] public Camera fpscam; //Camara de donde nace el raycast
     public Transform gunEnd; //Empty de punta de arma
 
     public LayerMask shieldRed;
     public LayerMask shieldBlue;
+
+    [Header("ShootSound")]
+    public AudioSource disparoSound;
+    public AudioClip[] disparoSoundBank;
 
     public GameObject InstanciarVFX(Vector3 POINT)
     {
@@ -71,6 +76,7 @@ public class Shooting : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time > nextFire && currentAmmo > 0)
         {
             shoot();
+            AudioSystem.instance.PonerSonido(AudioSystem.instance.audiosTanke[0], AudioSystem.instance.audioSourcePlayer);
         }
     }
 
