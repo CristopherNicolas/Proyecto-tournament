@@ -23,7 +23,7 @@ public abstract class Item : NetworkBehaviour
     }
     private void Update()
     {
-        transform.Rotate(new Vector3(0, 1*Time.deltaTime, 0));
+        transform.Rotate(new Vector3(10 * Time.deltaTime, 0, 0));
     }
 
 

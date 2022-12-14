@@ -37,7 +37,9 @@ public partial class Partida : NetworkBehaviour
         while (NetworkManager.Singleton.ConnectedClientsList.Count < 2) yield return new WaitForEndOfFrame();
         Debug.Log("6 clientes conectados, comenzando partida");
         haComenzadoLaPartida = true;
+        yield return new WaitForSecondsRealtime(1);
         GenerarEsferasAurales();
+        //PosicionarJugadorClientRpc();
         PosicionarJugadorClientRpc();
         StartCoroutine(GameFlow());
         yield break;
@@ -66,8 +68,8 @@ public partial class Partida : NetworkBehaviour
     public void PosicionarJugadorClientRpc()
     {
         var q = GameObject.FindObjectsOfType<FirstPersonMovement>().ToList();
-       var player = q.Where(o => o.GetComponent<NetworkObject>().IsOwner);
-        if(IsHost||IsServer)
+        var player = q.Where(o => o.GetComponent<NetworkObject>().IsOwner);
+        if (IsHost || IsServer)
         {
 
             player.Where(o => o.IsOwnedByServer).First().transform.position =
@@ -76,11 +78,18 @@ public partial class Partida : NetworkBehaviour
             : posicionesTeamBlue[Random.Range(0, posicionesTeamBlue.Count)].transform.position;
             return;
         }
-        player.First().transform.position = player.First().tag is "red" ? 
+        player.First().transform.position = player.First().tag is "red" ?
             posicionesTeamRed[Random.Range(0, posicionesTeamRed.Count)].transform.position
             : posicionesTeamBlue[Random.Range(0, posicionesTeamBlue.Count)].transform.position;
     }
-    
+    //[ClientRpc]
+    //void PosicionarJugadorClientRpc()
+    //{
+    //   // buscar jugador local,
+    //   // segun el tag asignar posicion?
+    //   // el server que jugadores selecciona?
+    //}
+
 }
 /// <summary>
 /// flujo de partida
@@ -112,9 +121,7 @@ public partial class Partida : NetworkBehaviour
             ticketsBlue.Value = 30;
            ticketsRed.Value = 30;
            UISystem.uISystem.ShowMessajeUIClientRpc("Ronda terminada, cambiando equipo");
-         SwapTeam();
-            ChangeDistintiveClientRpc();
-         PosicionarJugadorClientRpc();
+            PosicionarJugadorClientRpc();
          rondas--;
         }
         string teamGanador;
@@ -124,13 +131,6 @@ public partial class Partida : NetworkBehaviour
         UISystem.uISystem.ShowMessajeUI($"juego terminado gana el equipo: {teamGanador}");
         yield break;
     }
-            public void SwapTeam()
-            {
-                var teamRed = GameObject.FindGameObjectsWithTag("red").ToList();
-                var teamBlue = GameObject.FindGameObjectsWithTag("blue").ToList();
-                teamBlue.ForEach(p => p.transform.tag = "red");
-                teamRed.ForEach(p => p.transform.tag = "blue");
-            }
     [ClientRpc] void ChangeDistintiveClientRpc()
     {
         var player = GameObject.FindObjectsOfType<FirstPersonMovement>().
