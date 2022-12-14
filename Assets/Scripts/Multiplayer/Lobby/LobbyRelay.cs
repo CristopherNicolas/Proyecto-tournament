@@ -203,7 +203,7 @@ public class LobbyRelay : MonoBehaviour
             _hostData.JoinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             string lobbyName = "game_lobby";
-            int maxPlayers = 2;
+            int maxPlayers = 5;
             CreateLobbyOptions options = new CreateLobbyOptions();
             options.IsPrivate = false;
 

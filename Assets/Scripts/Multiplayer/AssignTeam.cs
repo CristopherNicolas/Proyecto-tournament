@@ -16,7 +16,7 @@ public class AssignTeam : NetworkBehaviour
      void CambiarColorDistintivoClient ()
     {
         if (!IsOwner) return;
-        UISystem.uISystem.teamDistintive.color = OwnerClientId > 0 ? Color.red : Color.blue;
+        UISystem.uISystem.teamDistintive.color = OwnerClientId > 2 ? Color.red : Color.blue;
     }
 
 }
