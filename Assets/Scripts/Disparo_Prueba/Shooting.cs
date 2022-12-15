@@ -56,11 +56,7 @@ public class Shooting : NetworkBehaviour
 
     // Update is called once per frame
     void Update()
-<<<<<<< Updated upstream
     {
-=======
-     {
->>>>>>> Stashed changes
         if (!IsOwner) return;
         #region DrawRay(viewport)
         Vector3 lineOrigin = fpscam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); //Crea un vector en el centro de la camara del viewport (lineOrigin)
