@@ -7,34 +7,32 @@ using System.Linq;
 public class DPS : Personaje
 {
     public Shooting shooting;
-    public GameObject Player, skillPoint, knife;
-    public bool canUlti = false;
+    public GameObject Player, skillPoint, ultiSword;
+    public Rigidbody playerRB, swordRB;
+    public bool secondHability = true;
     Personaje personajeVida;
     move_noNetwork _spdMove;
+    melee melee;
 
 
     public override void habilidad1()
     {
         base.habilidad1();
+        melee = GetComponentInChildren<melee>();
+        playerRB.AddForce(transform.forward * 100, ForceMode.Impulse);
         spdPlus();
     }
     public override void habilidad2()
     {
         base.habilidad2();
+        melee = GetComponentInChildren<melee>();
 
-        reduccionDMG();
+      
     }
     public override void habilidad3()
     {
         base.habilidad3();
-
-        RaycastHit[] hits;
-        hits = Physics.RaycastAll(skillPoint.transform.position, skillPoint.transform.forward, 100);
-
-        var cleanArr = hits.Where(x => x.transform.tag != transform.tag);
-
-        cleanArr.ToList().ForEach(x => x.transform.GetComponent<Personaje>().vida -= 30);
-
+        GameObject ultiAttack = Instantiate(ultiSword, skillPoint.transform.position, skillPoint.transform.rotation) as GameObject;
     }
 
     public async void reduccionDMG()
@@ -54,24 +52,30 @@ public class DPS : Personaje
     {
         _spdMove = gameObject.GetComponent<move_noNetwork>();
         _spdMove.speed *= 2;
+        melee.fireRate = 0.05f;
         Debug.Log("Velocidad aumentada");
 
         await Task.Delay(3000);
 
+        melee.fireRate = 0.10f;
         _spdMove.speed /= 2;
         Debug.Log("Velocidad normal");
 
 
     }
 
-    //public async override void estadoAletrado()
-    //{
-    //    vida -= 2;
-    //    await Task.Delay(4000);
-    //    alterado = false;
-    //Updated upstream
+    public async void autoAttack()
+    {
+        //melee.automelee_attack();
 
-    //}
+        await Task.Delay(8000);
+        secondHability = false;
+
+        Debug.Log("Terminado");
+
+    }
+
+ 
 }
 
     #region Reduccion
