@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using Unity.Netcode;
 
-public class shootingSupport : MonoBehaviour
+public class shootingSupport : NetworkBehaviour
 {
     public float weaponRange = 100f; //Distancia máxima de disparo (raycast)
     public float fireRate = 0.25f; //Tiempo entre disparos
@@ -49,6 +50,7 @@ public class shootingSupport : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         #region DrawRay(viewport)
         Vector3 lineOrigin = fpscam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)); //Crea un vector en el centro de la camara del viewport (lineOrigin)
         Debug.DrawRay(lineOrigin, fpscam.transform.forward * weaponRange, Color.green);

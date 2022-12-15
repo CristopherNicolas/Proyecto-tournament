@@ -20,12 +20,10 @@ public class melee : MonoBehaviour
     public AudioSource disparoSound;
     public AudioClip[] disparoSoundBank;*/
 
-    [ServerRpc]
-    public GameObject InstanciarVFXServerRpc(Vector3 POINT)
+    public GameObject InstanciarVFX(Vector3 POINT)
     {
         //instancias
         var obj = Instantiate(impactoEfecto, POINT, Quaternion.identity);
-        obj.GetComponent<NetworkObject>().Spawn();
         return obj;
     }
 
@@ -64,7 +62,7 @@ public class melee : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                    GameObject impactoeffectGo2 = InstanciarVFX(hit.point);
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 
@@ -130,7 +128,7 @@ public class melee : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point); //activar este
+                    GameObject impactoeffectGo2 = InstanciarVFX(hit.point); //activar este
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 
@@ -202,7 +200,7 @@ public class melee : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point);
+                    GameObject impactoeffectGo2 = InstanciarVFX(hit.point);
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 
@@ -268,7 +266,7 @@ public class melee : MonoBehaviour
 
                 if (hit.rigidbody != null) //si colisiona con algo con rigidbody
                 {
-                    GameObject impactoeffectGo2 = InstanciarVFXServerRpc(hit.point); //activar este
+                    GameObject impactoeffectGo2 = InstanciarVFX(hit.point); //activar este
                     //GameObject impactoeffectGo = Instantiate(impactoEfecto, hit.point, Quaternion.identity) as GameObject; //crea particulas de efecto en zona que se le disparo
                     Destroy(impactoeffectGo2, 2f);
 

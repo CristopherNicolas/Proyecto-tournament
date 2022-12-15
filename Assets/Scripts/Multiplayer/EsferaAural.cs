@@ -16,7 +16,8 @@ public class EsferaAural : NetworkBehaviour
             if (IsOwner)
             {
                 int i=0; if (personajeEsfera == tanque.GetComponent<Tanque>()) i = 0;
-                else if (personajeEsfera == tanque.GetComponent<soporte>()) i = 1;
+                else if (personajeEsfera == soporte.GetComponent<soporte>()) i = 1;
+                else if (personajeEsfera == dps.GetComponent<DPS>()) i = 2;
                 //destruir al collider para
                 colision = other.gameObject;
                 DestroyPlayerServerRpc();
@@ -37,6 +38,7 @@ public class EsferaAural : NetworkBehaviour
         {
             case 0: tmp = Instantiate(tanque) ;break;
             case 1: tmp = Instantiate(soporte) ;break;
+            case 2: tmp = Instantiate(dps) ;break;
             default: print("error en InstantiatePersonaje"); return;
         }
         tmp.GetComponent<NetworkObject>().SpawnWithOwnership(ownerId);

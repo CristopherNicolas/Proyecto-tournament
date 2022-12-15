@@ -41,7 +41,32 @@ public partial class Partida : NetworkBehaviour
         GenerarEsferasAurales();
         //PosicionarJugadorClientRpc();
         PosicionarJugadorClientRpc();
-        StartCoroutine(GameFlow());
+        int blueRondasGanadas = 0, RedRondasGanadas = 0;
+        int rondas = 2;
+        UISystem.uISystem.ShowMessajeUIClientRpc("Comienza el juego!");
+        while (rondas > 0)
+        {
+            InstanciarItemServerRpc();
+            ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
+            yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0 ||
+             banderasAzulesCapturadas.Value == 2 || banderasRojasCapturadas.Value == 2);
+            if (ticketsBlue.Value == 0 || banderasAzulesCapturadas.Value == 2)
+                RedRondasGanadas++;
+            else if (ticketsRed.Value == 0 || banderasRojasCapturadas.Value == 2)
+                blueRondasGanadas++;
+            banderasAzulesCapturadas.Value = 0;
+            banderasRojasCapturadas.Value = 0;
+            ticketsBlue.Value = 30;
+            ticketsRed.Value = 30;
+            UISystem.uISystem.ShowMessajeUIClientRpc("Ronda terminada, cambiando equipo");
+            PosicionarJugadorClientRpc();
+            rondas--;
+        }
+        string teamGanador;
+        if (blueRondasGanadas > RedRondasGanadas) teamGanador = "blue";
+        else if (blueRondasGanadas < RedRondasGanadas) teamGanador = "red";
+        else teamGanador = "empate";
+        UISystem.uISystem.ShowMessajeUI($"juego terminado gana el equipo: {teamGanador}");
         yield break;
     }
     //instanciar 6 esferas aurales, a cada una a�adir la clase seleccionada del game manager
@@ -82,14 +107,6 @@ public partial class Partida : NetworkBehaviour
             posicionesTeamRed[Random.Range(0, posicionesTeamRed.Count)].transform.position
             : posicionesTeamBlue[Random.Range(0, posicionesTeamBlue.Count)].transform.position;
     }
-    //[ClientRpc]
-    //void PosicionarJugadorClientRpc()
-    //{
-    //   // buscar jugador local,
-    //   // segun el tag asignar posicion?
-    //   // el server que jugadores selecciona?
-    //}
-
 }
 /// <summary>
 /// flujo de partida
@@ -101,44 +118,6 @@ public partial class Partida : NetworkBehaviour
    public NetworkVariable<int> banderasAzulesCapturadas = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<int> banderasRojasCapturadas = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public TMP_Text textTicketsBlue,textTicketsRed;
-    IEnumerator GameFlow()
-    {
-        int blueRondasGanadas=0,RedRondasGanadas = 0;
-        int rondas = 2;
-        UISystem.uISystem.ShowMessajeUIClientRpc ("Comienza el juego!");
-        while (rondas > 0)
-        {
-            InstanciarItemServerRpc();
-            ActualizarMarcadorClientRpc(ticketsBlue.Value, ticketsRed.Value);
-             yield return new WaitUntil(() => ticketsBlue.Value == 0 || ticketsRed.Value == 0||
-              banderasAzulesCapturadas.Value==2|| banderasRojasCapturadas.Value==2);
-               if(ticketsBlue.Value == 0||banderasAzulesCapturadas.Value ==2)
-                 RedRondasGanadas++;
-                    else if(ticketsRed.Value == 0||banderasRojasCapturadas.Value ==2)
-                 blueRondasGanadas++;
-               banderasAzulesCapturadas.Value = 0;
-              banderasRojasCapturadas.Value = 0;
-            ticketsBlue.Value = 30;
-           ticketsRed.Value = 30;
-           UISystem.uISystem.ShowMessajeUIClientRpc("Ronda terminada, cambiando equipo");
-            PosicionarJugadorClientRpc();
-         rondas--;
-        }
-        string teamGanador;
-        if (blueRondasGanadas > RedRondasGanadas) teamGanador = "blue";
-        else if (blueRondasGanadas < RedRondasGanadas) teamGanador = "red";
-        else teamGanador = "empate";
-        UISystem.uISystem.ShowMessajeUI($"juego terminado gana el equipo: {teamGanador}");
-        yield break;
-    }
-    [ClientRpc] void ChangeDistintiveClientRpc()
-    {
-        var player = GameObject.FindObjectsOfType<FirstPersonMovement>().
-            Where(p => p.GetComponent<NetworkObject>().OwnerClientId == NetworkManager.Singleton.LocalClientId).First();
-        GameObject.Find("team distintive (ui manager)").GetComponent<Image>().color
-            = player.CompareTag("red") ? Color.red : Color.blue;
-    }
-
     [ClientRpc]
     public void  StartGameNotificationClientRpc()
     {
@@ -147,11 +126,11 @@ public partial class Partida : NetworkBehaviour
     [ClientRpc]
     public void ActualizarMarcadorClientRpc(int blueT,int redT)
     {
-        textTicketsBlue.text = blueT.ToString();
-        textTicketsRed.text = redT.ToString();
+        GameObject.Find("tickets team blue").GetComponent<TMP_Text>().text = blueT.ToString();
+        GameObject.Find("tickets team red").GetComponent<TMP_Text>().text = blueT.ToString();
     }
     [ServerRpc]
-    public void QuitarTicketServerRpc(FixedString128Bytes teamAQuitar)
+    public void QuitaarTicketServerRpc(FixedString128Bytes teamAQuitar)
     {
         if (teamAQuitar.ToString() is "blue") ticketsBlue.Value -= 1;
         else if (teamAQuitar.ToString() is "red") ticketsRed.Value -= 1;
