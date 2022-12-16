@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using Unity.Netcode;
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 public class shootingSupport : NetworkBehaviour
 {
     public float weaponRange = 100f; //Distancia máxima de disparo (raycast)

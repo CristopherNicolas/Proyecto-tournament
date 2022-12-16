@@ -24,9 +24,15 @@ public class DPS : Personaje
     }
     public override void habilidad2()
     {
+        //problema: se puede atacar aun con el click de disparo normal mientras realiza el ataque
+
         base.habilidad2();
         melee = GetComponentInChildren<melee>();
 
+        if (secondHability == true)
+        {
+            autoAttack();
+        }
       
     }
     public override void habilidad3()
@@ -66,55 +72,61 @@ public class DPS : Personaje
 
     public async void autoAttack()
     {
-        //melee.automelee_attack();
-
-        await Task.Delay(8000);
         secondHability = false;
+        melee.automelee_attack();
+        await Task.Delay(500);
+        melee.automelee_attack();
+        await Task.Delay(500);
+        melee.automelee_attack();
 
         Debug.Log("Terminado");
 
+        await Task.Delay(8000);
+        secondHability = true;
+        Debug.Log("habilidad 2 lista");
     }
 
  
 }
 
-    #region Reduccion
-    //IEnumerator damageReduction()
-    //{
-    //    damageRecibe = (damageRecibe / 2);
-    //    Debug.Log("Reduccion lista");
 
-    //    yield return new WaitForSecondsRealtime(5);
+#region Reduccion
+//IEnumerator damageReduction()
+//{
+//    damageRecibe = (damageRecibe / 2);
+//    Debug.Log("Reduccion lista");
 
-    //    damageRecibe = damage;
-    //    Debug.Log("Reduccion desactivada");
+//    yield return new WaitForSecondsRealtime(5);
 
-    //    yield break;
-    //}
+//    damageRecibe = damage;
+//    Debug.Log("Reduccion desactivada");
 
-    #endregion
+//    yield break;
+//}
 
-    //public override void Pasivas()
-    //{
-    //    if (vida < maxvida / 2)
-    //    {
-    //        if (canPasiva == true)
-    //        {
-    //            Debug.Log("Pasiva Activada");
-    //            multiple = true;
-    //            canPasiva = false;
-    //        }
+#endregion
 
-    //    }
-    //    if (vida >= maxvida / 2)
-    //    {
-    //        if (canPasiva == false)
-    //        {
-    //            Debug.Log("Pasiva Desactivada");
-    //            resetDamage = true;
-    //            canPasiva = true;
-    //        }
-    //    }
+//public override void Pasivas()
+//{
+//    if (vida < maxvida / 2)
+//    {
+//        if (canPasiva == true)
+//        {
+//            Debug.Log("Pasiva Activada");
+//            multiple = true;
+//            canPasiva = false;
+//        }
 
-    //}
+//    }
+//    if (vida >= maxvida / 2)
+//    {
+//        if (canPasiva == false)
+//        {
+//            Debug.Log("Pasiva Desactivada");
+//            resetDamage = true;
+//            canPasiva = true;
+//        }
+//    }
+
+//}
 

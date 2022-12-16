@@ -117,9 +117,7 @@ public partial class Partida : NetworkBehaviour
    public NetworkVariable<int> banderasAzulesCapturadas = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public NetworkVariable<int> banderasRojasCapturadas = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public TMP_Text textTicketsBlue,textTicketsRed;
-<<<<<<< Updated upstream
-=======
- 
+
     [ClientRpc] void ChangeDistintiveClientRpc()
     {
         var player = GameObject.FindObjectsOfType<FirstPersonMovement>().
@@ -128,7 +126,6 @@ public partial class Partida : NetworkBehaviour
             = player.CompareTag("red") ? Color.red : Color.blue;
     }
 
->>>>>>> Stashed changes
     [ClientRpc]
     public void  StartGameNotificationClientRpc()
     {
