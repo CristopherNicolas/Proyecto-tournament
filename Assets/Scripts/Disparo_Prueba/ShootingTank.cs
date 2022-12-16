@@ -3,13 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.VFX;
-<<<<<<< Updated upstream
-
-public class ShootingTank : NetworkBehaviour
-=======
-using Unity.Netcode;
 public class ShootingTank : NetworkBehaviour 
->>>>>>> Stashed changes
 {
     public tank_animation tankanim;
 
